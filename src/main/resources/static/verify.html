@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码测试</title>
+</head>
+<body>
+    <img src="/captcha" onclick="this.src='/captcha?d=' + new Date()*1">
+<br>
+    <input type="text" id="code" maxlength="5" placeholder="请输入验证码">
+    <button id="verify">验证</button><br>
+    <p id="verifyCode"></p>
+</body>
+<script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // 验证按钮的点击事件
+        $("#verify").click(function () {
+            //拿到输入框中用户输入的验证码
+            let code = $.trim($("#code").val())
+            if(code == ""){
+                alert("请输入验证码")
+                return;
+            }
+            $.ajax({
+                url: "/verify",
+                data: {
+                    code: code
+                },
+                type: "get",
+                dataType: "text",
+                success: function (result) {
+                    // 将验证结果显示在p标签中
+                    $("#verifyCode").html(result)
+                },
+                error: function () {
+                    alert("请求失败")
+                }
+            })
+        })
+    })
+</script>
+</html>
