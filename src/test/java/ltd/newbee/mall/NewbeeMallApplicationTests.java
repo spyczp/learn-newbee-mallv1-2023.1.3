@@ -1,8 +1,10 @@
 package ltd.newbee.mall;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import sun.security.provider.MD5;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

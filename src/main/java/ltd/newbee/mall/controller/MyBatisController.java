@@ -1,11 +1,9 @@
 package ltd.newbee.mall.controller;
 
-import ltd.newbee.mall.dao.UserDao;
+import ltd.newbee.mall.dao.UserMapper;
 import ltd.newbee.mall.entity.User;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +14,7 @@ import java.util.List;
 public class MyBatisController {
 
     @Resource
-    private UserDao userDao;
+    private UserMapper userDao;
 
     @GetMapping("/findAllUser")
     public List<User> findAllUser(){

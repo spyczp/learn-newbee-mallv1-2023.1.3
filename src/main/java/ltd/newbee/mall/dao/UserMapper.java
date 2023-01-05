@@ -4,7 +4,7 @@ import ltd.newbee.mall.entity.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserMapper {
 
     /**
      * 返回数据列表

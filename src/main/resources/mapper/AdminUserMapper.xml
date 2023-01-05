@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.AdminUserMapper">
+    <resultMap type="ltd.newbee.mall.entity.AdminUser" id="BaseResultMap">
+        <result property="adminUserId" jdbcType="INTEGER" column="admin_user_id"/>
+        <result property="loginUserName" jdbcType="VARCHAR" column="login_user_name"/>
+        <result property="loginPassword" jdbcType="VARCHAR" column="login_password"/>
+        <result property="nickName" jdbcType="VARCHAR" column="nick_name"/>
+        <result property="locked" jdbcType="TINYINT" column="locked"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        admin_user_id,
+        login_user_name,
+        login_password,
+        nick_name,
+        locked
+    </sql>
+
+    <select id="selectAdminUserForLogin" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_admin_user
+        where login_user_name=#{loginUserName} and login_password=#{loginPassword}
+    </select>
+</mapper>

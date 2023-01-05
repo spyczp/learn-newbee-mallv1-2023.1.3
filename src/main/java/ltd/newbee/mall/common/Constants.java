@@ -31,4 +31,14 @@ public class Constants {
 
     public final static int SELL_STATUS_UP = 0;//商品上架状态
     public final static int SELL_STATUS_DOWN = 1;//商品下架状态
+
+    public final static String ERROR_MSG = "errorMsg"; //错误信息
+
+    public final static String VERIFY_CODE = "verifyCode"; //验证码
+
+    public final static String SESSION_LOGIN_USER = "loginUser"; //登录用户昵称
+
+    public final static String SESSION_LOGIN_USER_ID = "loginUserId"; //登录用户id
+
+
 }
