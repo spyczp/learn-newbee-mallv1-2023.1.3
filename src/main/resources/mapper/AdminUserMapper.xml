@@ -17,6 +17,27 @@
         locked
     </sql>
 
+    <update id="updatePasswordAtProfile" parameterType="map">
+        update tb_newbee_mall_admin_user
+        set
+            login_password=#{newPassword}
+        where admin_user_id=#{loginUserId}
+    </update>
+
+    <update id="updateUserInfoAtProfile" parameterType="ltd.newbee.mall.entity.AdminUser">
+        update tb_newbee_mall_admin_user
+        set
+            login_user_name=#{loginUserName},
+            nick_name=#{nickName}
+        where admin_user_id=#{adminUserId}
+    </update>
+
+    <select id="selectAdminUserForProfile" parameterType="int" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_admin_user
+        where admin_user_id=#{loginUserId}
+    </select>
+
     <select id="selectAdminUserForLogin" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
         from tb_newbee_mall_admin_user
