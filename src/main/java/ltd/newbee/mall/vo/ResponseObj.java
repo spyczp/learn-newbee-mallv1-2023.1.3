@@ -12,10 +12,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponseObj {
+public class ResponseObj<T> {
 
     private Integer code;
     private String message;
-    private String otherInfo;
+    private T data;
 
+    public ResponseObj(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 }
