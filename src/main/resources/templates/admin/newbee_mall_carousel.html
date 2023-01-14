@@ -1,0 +1,73 @@
+!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/header::header-fragment">
+    <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap.min.css}">
+    <link th:href="/jqGrid-5.8.0/ui.jqgrid-bootstrap4.css" rel="stylesheet"/>
+
+</header>
+<style>
+    .ui-jqgrid tr.jqgrow td {
+        white-space: normal !important;
+        height: auto;
+        vertical-align: text-top;
+        padding-top: 2px;
+    }
+</style>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="admin/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains （图标content） -->
+    <div class="content-wrapper">
+        <!-- Content Header （图标header） -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">轮播图管理</h3>
+                    </div> <!-- /.card-body -->
+                    <div class="card-body">
+                        <div class="grid-btn">
+                            <button class="btn btn-info" onclick="carouselAdd()"><i
+                                    class="fa fa-plus"></i>&nbsp;新增
+                            </button>
+                            <button class="btn btn-info" onclick="carouselEdit()"><i
+                                    class="fa fa-pencil-square-o"></i>&nbsp;修改
+                            </button>
+                            <button class="btn btn-danger" onclick="deleteCarousel()"><i
+                                    class="fa fa-trash-o"></i>&nbsp;删除
+                            </button>
+                        </div>
+                        轮播图管理页面
+                    </div><!-- /.card-body -->
+                </div>
+            </div><!-- /.container-fluid -->
+            <table id="jqGrid" class="table table-bordered"></table>
+            <div id="jqGridPager"></div>
+        </div>
+    </div>
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="admin/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/admin/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!-- grid.locale-cn.js 为国际化所需的文件，-cn 表示中文 -->
+<script th:src="@{/jqGrid-5.8.0/grid.locale-cn.js}"></script>
+<script th:src="@{/jqGrid-5.8.0/jquery.jqGrid.min.js}"></script>
+<!--分页插件初始化-->
+<script th:src="@{/admin/dist/js/newbee_mall_carousel.js}"></script>
+</body>
+</html>

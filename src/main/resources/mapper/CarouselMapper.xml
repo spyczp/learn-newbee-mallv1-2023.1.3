@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.CarouselMapper">
+    <resultMap type="ltd.newbee.mall.entity.Carousel" id="BaseResultMap">
+        <result property="carouselId" jdbcType="INTEGER" column="carousel_id"/>
+        <result property="carouselUrl" jdbcType="VARCHAR" column="carousel_url"/>
+        <result property="redirectUrl" jdbcType="VARCHAR" column="redirect_url"/>
+        <result property="carouselRank" jdbcType="VARCHAR" column="carousel_rank"/>
+        <result property="isDeleted" jdbcType="TINYINT" column="is_deleted"/>
+        <result property="createTime" jdbcType="TINYINT" column="create_time"/>
+        <result property="createUser" jdbcType="TINYINT" column="create_user"/>
+        <result property="updateTime" jdbcType="TINYINT" column="update_time"/>
+        <result property="updateUser" jdbcType="TINYINT" column="update_user"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        carousel_id,
+        carousel_url,
+        redirect_url,
+        carousel_rank,
+        is_deleted,
+        create_time,
+        create_user,
+        update_time,
+        update_user
+    </sql>
+
+    <select id="selectCarouselListForPagination" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_carousel
+        order by carousel_rank
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="selectCountForPagination" resultType="int">
+        select count(*)
+        from tb_newbee_mall_carousel
+    </select>
+
+</mapper>

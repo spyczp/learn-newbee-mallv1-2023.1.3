@@ -26,8 +26,8 @@ $(function () {
             records: "data.totalCount"
         },
         prmNames: {
-            page: "page",
-            rows: "limit",
+            page: "pageNum",
+            rows: "pageSize",
             order: "order",
         },
         gridComplete: function () {
