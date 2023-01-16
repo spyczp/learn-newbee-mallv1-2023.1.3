@@ -3,7 +3,7 @@
 <header th:replace="admin/header::header-fragment">
     <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap.min.css}">
     <link th:href="/jqGrid-5.8.0/ui.jqgrid-bootstrap4.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert2/sweetalert2.min.css}">
 </header>
 <style>
     .ui-jqgrid tr.jqgrow td {
@@ -49,8 +49,63 @@
                     </div><!-- /.card-body -->
                 </div>
             </div><!-- /.container-fluid -->
+            <!--实现分页功能需要的2个标签-->
             <table id="jqGrid" class="table table-bordered"></table>
             <div id="jqGridPager"></div>
+            <!-- /.modal -->
+        </div>
+        <div class="content">
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog"
+                 aria-labelledby="carouselModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h6 class="modal-title" id="carouselModalLabel">Modal</h6>
+                        </div>
+                        <div class="modal-body">
+                            <form id="indexConfigForm">
+                                <div class="form-group">
+                                    <div class="alert alert-danger" id="edit-error-msg" style="display: none;">
+                                        错误信息展示栏。
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <img id="carouselImg" src="/admin/dist/img/img-upload.png"
+                                             style="height: 64px;width: 64px;">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-info" style="margin-bottom: 5px;"
+                                                id="uploadCarouselImage">
+                                            <i class="fa fa-picture-o"></i>&nbsp;上传轮播图
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="redirectUrl" class="control-label">跳转链接:</label>
+                                    <input type="text" class="form-control" id="redirectUrl" name="redirectUrl"
+                                           placeholder="请输入跳转链接" value="##">
+                                </div>
+                                <div class="form-group">
+                                    <label for="carouselRank" class="control-label">排序值:</label>
+                                    <input type="number" class="form-control" id="carouselRank" name="carouselRank"
+                                           placeholder="请输入排序值">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="saveButton">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- 引入页脚footer-fragment -->
@@ -69,5 +124,10 @@
 <script th:src="@{/jqGrid-5.8.0/jquery.jqGrid.min.js}"></script>
 <!--分页插件初始化-->
 <script th:src="@{/admin/dist/js/newbee_mall_carousel.js}"></script>
+<!--使用JQuery插件 Ajaxupload实现文件上传-->
+<script th:src="@{/admin/plugins/ajaxupload/ajaxupload.js}"></script>
+
+<script th:src="@{/admin/dist/js/public.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert2/sweetalert2.all.min.js}"></script>
 </body>
 </html>

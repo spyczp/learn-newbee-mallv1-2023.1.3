@@ -59,7 +59,7 @@ $(function () {
             }
         },
         onComplete: function (file, r) {
-            if (r != null && r.resultCode == 200) {
+            if (r != null && r.code == 0) {
                 $("#carouselImg").attr("src", r.data);
                 $("#carouselImg").attr("style", "width: 128px;height: 128px;display:block;");
                 return false;
@@ -116,7 +116,7 @@ $('#saveButton').click(function () {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.code == 0) {
                 $('#carouselModal').modal('hide');
                 Swal.fire({
                     text: "保存成功",
@@ -181,7 +181,7 @@ function deleteCarousel() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.code == 0) {
                             Swal.fire({
                                 text: "删除成功",
                                 icon: "success",iconColor:"#1d953f",
@@ -201,7 +201,7 @@ function deleteCarousel() {
     ;
 }
 
-
+//重置模态窗口
 function reset() {
     $("#redirectUrl").val('##');
     $("#carouselRank").val(0);

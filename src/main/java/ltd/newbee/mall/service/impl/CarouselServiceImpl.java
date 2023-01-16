@@ -25,4 +25,19 @@ public class CarouselServiceImpl implements CarouselService {
         //创建PageResult对象，封装数据
         return new PageResult(pageNum, pageSize, totalCount, carouselList);
     }
+
+    @Override
+    public int saveACarousel(Carousel carousel) {
+        return carouselMapper.insertACarousel(carousel);
+    }
+
+    @Override
+    public int editACarousel(Carousel carousel) {
+        return carouselMapper.updateACarousel(carousel);
+    }
+
+    @Override
+    public int deleteCarousel(Integer[] ids, Integer updateUser) {
+        return carouselMapper.updateIsDeletedByIds(ids, updateUser);
+    }
 }

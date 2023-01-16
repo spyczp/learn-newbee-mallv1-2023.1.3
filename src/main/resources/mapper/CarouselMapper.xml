@@ -25,9 +25,53 @@
         update_user
     </sql>
 
+    <update id="updateIsDeletedByIds">
+        update tb_newbee_mall_carousel
+        set
+            is_deleted=1,
+            update_time=now(),
+            update_user=#{updateUser}
+        where carousel_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateACarousel" parameterType="ltd.newbee.mall.entity.Carousel">
+        update tb_newbee_mall_carousel
+        set
+            carousel_url=#{carouselUrl},
+            redirect_url=#{redirectUrl},
+            carousel_rank=#{carouselRank},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+
+        where carousel_id=#{carouselId}
+    </update>
+
+    <insert id="insertACarousel" parameterType="ltd.newbee.mall.entity.Carousel">
+        insert into tb_newbee_mall_carousel(
+            carousel_url,
+            redirect_url,
+            carousel_rank,
+            is_deleted,
+            create_time,
+            create_user
+        )
+        values(
+            #{carouselUrl},
+            #{redirectUrl},
+            #{carouselRank},
+            #{isDeleted},
+            #{createTime},
+            #{createUser}
+              )
+    </insert>
+
     <select id="selectCarouselListForPagination" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
         from tb_newbee_mall_carousel
+        where is_deleted=0
         order by carousel_rank
         limit #{startIndex}, #{pageSize}
     </select>

@@ -154,10 +154,12 @@ function getSelectedRow() {
  */
 function getSelectedRowWithoutAlert() {
     var grid = $("#jqGrid");
+    //getGridParam（"selrow"）：获得选中行的ID
     var rowKey = grid.getGridParam("selrow");
     if (!rowKey) {
         return;
     }
+    //getGridParam（"selarrrow"）：可以多选时，返回选中行的ID
     var selectedIDs = grid.getGridParam("selarrrow");
     if (selectedIDs.length > 1) {
         return;

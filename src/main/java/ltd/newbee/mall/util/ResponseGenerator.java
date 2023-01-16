@@ -27,15 +27,26 @@ public class ResponseGenerator {
     }
 
     /**
+     * 生成成功的默认响应信息
+     * @return 响应数据
+     */
+    public static ResponseObj genSuccessResponse(){
+        ResponseObj responseObj = new ResponseObj();
+        responseObj.setCode(RESPONSE_CODE_SUCCESS);
+        responseObj.setMessage(RESPONSE_MESSAGE_SUCCESS);
+        return responseObj;
+    }
+
+    /**
      * 生成成功的响应信息-带数据
      * @param data 响应数据
      * @return 响应信息对象
      */
-    public static ResponseObj genSuccessResponse(Object data){
-        ResponseObj<PageResult> responseObj = new ResponseObj<>();
+    public static <T> ResponseObj genSuccessResponse(T data){
+        ResponseObj<T> responseObj = new ResponseObj<>();
         responseObj.setCode(RESPONSE_CODE_SUCCESS);
         responseObj.setMessage(RESPONSE_MESSAGE_SUCCESS);
-        responseObj.setData((PageResult) data);
+        responseObj.setData(data);
         return responseObj;
     }
 }
