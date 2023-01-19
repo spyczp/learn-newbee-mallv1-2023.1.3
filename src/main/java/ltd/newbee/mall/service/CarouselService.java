@@ -12,4 +12,6 @@ public interface CarouselService {
     int editACarousel(Carousel carousel);
 
     int deleteCarousel(Integer[] ids, Integer updateUser);
+
+    Carousel queryCarouselById(Integer id);
 }

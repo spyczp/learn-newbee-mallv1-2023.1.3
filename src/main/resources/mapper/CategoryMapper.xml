@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.CategoryMapper">
+    <resultMap type="ltd.newbee.mall.entity.Category" id="BaseResultMap">
+        <result property="categoryId" jdbcType="BIGINT" column="category_id"/>
+        <result property="categoryLevel" jdbcType="TINYINT" column="category_level"/>
+        <result property="parentId" jdbcType="BIGINT" column="parent_id"/>
+        <result property="categoryName" jdbcType="VARCHAR" column="category_name"/>
+        <result property="categoryRank" jdbcType="INTEGER" column="category_rank"/>
+        <result property="isDeleted" jdbcType="TINYINT" column="is_deleted"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="createUser" jdbcType="INTEGER" column="create_user"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <result property="updateUser" jdbcType="INTEGER" column="update_user"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        category_id,
+        category_level,
+        parent_id,
+        category_name,
+        category_rank,
+        is_deleted,
+        create_time,
+        create_user,
+        update_time,
+        update_user
+    </sql>
+
+    <select id="selectCountForPagination" parameterType="map" resultType="int">
+        select count(*)
+        from tb_newbee_mall_goods_category
+        <where>
+            <if test="parentId != null and parentId != ''">
+                parent_id=#{parentId}
+            </if>
+            and category_level=#{categoryLevel}
+        </where>
+    </select>
+
+    <select id="selectCategoryListForPagination" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_category
+        <where>
+            <if test="parentId != null and parentId != ''">
+                parent_id=#{parentId}
+            </if>
+            and category_level=#{categoryLevel}
+        </where>
+        order by category_rank
+        limit #{startIndex}, #{pageSize}
+    </select>
+</mapper>

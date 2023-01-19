@@ -149,7 +149,7 @@ function carouselEdit() {
     }
     //请求数据
     $.get("/admin/carousels/info/" + id, function (r) {
-        if (r.resultCode == 200 && r.data != null) {
+        if (r.code == 0 && r.data != null) {
             //填充数据至modal
             $("#carouselImg").attr("src", r.data.carouselUrl);
             $("#carouselImg").attr("style", "height: 64px;width: 64px;display:block;");

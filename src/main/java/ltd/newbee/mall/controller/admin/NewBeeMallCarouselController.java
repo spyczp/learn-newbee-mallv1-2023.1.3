@@ -30,6 +30,29 @@ public class NewBeeMallCarouselController {
     @Resource
     private CarouselService carouselService;
 
+
+    /**
+     * 根据id查询轮播图，用于轮播图编辑
+     * 1.拿到轮播图id
+     * 2.到数据库查询轮播图信息
+     * 3.返回信息给前端
+     * @param id 轮播图id
+     * @return 响应对象
+     */
+    @GetMapping("/carousels/info/{id}")
+    @ResponseBody
+    public Object getCarouselByIdForEdit(@PathVariable("id") Integer id){
+        if(id == null){
+            return ResponseGenerator.genFailResponse("参数异常");
+        }
+        Carousel carousel = carouselService.queryCarouselById(id);
+        if(carousel == null){
+            return ResponseGenerator.genFailResponse("该轮播图不存在");
+        }else{
+            return ResponseGenerator.genSuccessResponse(carousel);
+        }
+    }
+
     /**
      * 删除选中的轮播图，实际是修改isDeleted为1
      * 1.拿到前端提交的数据：id组成的数组

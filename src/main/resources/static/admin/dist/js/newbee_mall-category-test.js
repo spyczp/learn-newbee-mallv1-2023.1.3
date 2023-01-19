@@ -1,3 +1,15 @@
+/*
+  点击左侧栏“分类管理”，跳转到分类管理页面
+  发起异步请求，展示分类列表。默认展示1级分类
+  为了进行层级的切换，来展示不同层级、不同分类名称的下一层分类列表，
+  把分类名称改为用a标签显示，目的是给a标签添加点击事件，从而展示下级分类列表
+*   1.把分类名称的标签改为a标签
+*   2.点击a标签能触发点击事件
+*   3.点击事件：
+*       1.拿到点击a标签所在行的categoryId
+*       2.
+* */
+
 $(function () {
     var categoryLevel = $("#categoryLevel").val();
     var parentId = $("#parentId").val();
@@ -7,9 +19,11 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: 'id', name: 'categoryId', index: 'categoryId', width: 50, key: true, hidden: true},
-            {label: '分类名称', name: 'categoryName', index: 'categoryName', width: 240},
+            {label: '分类名称', name: 'categoryName', index: 'categoryName', width: 240, formatter:changeLabelToA},
             {label: '排序值', name: 'categoryRank', index: 'categoryRank', width: 120},
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 120},
+            {label: '父id', name: 'parentId', index: 'parentId', hidden: true},
+            {label: '层级', name: 'categoryLevel', index: 'categoryLevel', hidden: true},
         ],
         height: 560,
         rowNum: 10,
@@ -28,8 +42,8 @@ $(function () {
             records: "data.totalCount"
         },
         prmNames: {
-            page: "page",
-            rows: "limit",
+            page: "pageNum",
+            rows: "pageSize",
             order: "order",
         },
         gridComplete: function () {
@@ -41,6 +55,15 @@ $(function () {
     $(window).resize(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
     });
+
+    /*把分类名称转换成a标签，用于点击后跳转到下一层级
+    *
+    * */
+    function changeLabelToA(cellValue, option, rowObject) {
+        console.log(rowObject)
+        console.log(rowObject.categoryId)
+        return "<a href='#' name='changeLevelA' categoryLevel='"+ rowObject.categoryLevel +"' parentId='"+ rowObject.parentId +"' categoryId='"+ rowObject.categoryId +"'>" + cellValue + "</a>";
+    }
 });
 
 /**

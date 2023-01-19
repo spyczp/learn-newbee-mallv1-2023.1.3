@@ -40,4 +40,9 @@ public class CarouselServiceImpl implements CarouselService {
     public int deleteCarousel(Integer[] ids, Integer updateUser) {
         return carouselMapper.updateIsDeletedByIds(ids, updateUser);
     }
+
+    @Override
+    public Carousel queryCarouselById(Integer id) {
+        return carouselMapper.selectCarouselById(id);
+    }
 }

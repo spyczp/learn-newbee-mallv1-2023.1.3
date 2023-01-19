@@ -20,4 +20,6 @@ public interface CarouselMapper {
      * @return 结果数据
      */
     int updateIsDeletedByIds(Integer[] ids, Integer updateUser);
+
+    Carousel selectCarouselById(Integer id);
 }
