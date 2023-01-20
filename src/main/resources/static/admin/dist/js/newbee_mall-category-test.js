@@ -5,15 +5,21 @@
   把分类名称改为用a标签显示，目的是给a标签添加点击事件，从而展示下级分类列表
 *   1.把分类名称的标签改为a标签
 *   2.点击a标签能触发点击事件
-*   3.点击事件：
-*       1.拿到点击a标签所在行的categoryId
-*       2.
+*   3.点击事件：（隐藏标签用来保存点击后的状态）
+*       1.拿到点击a标签所在行的categoryId、categoryLevel、parentId
+*       2.把id为parentId标签的值保存到id为oldParentId的标签中
+        3.把categoryId保存到id为parentId的隐藏标签中
+        4.
+        5.把parentId保存到id为backParentId的隐藏标签中
+
 * */
 
 $(function () {
+
     var categoryLevel = $("#categoryLevel").val();
     var parentId = $("#parentId").val();
 
+    //展示分类列表，里面包含了分页插件
     $("#jqGrid").jqGrid({
         url: '/admin/categories/list?categoryLevel=' + categoryLevel + '&parentId=' + parentId,
         datatype: "json",
@@ -56,15 +62,63 @@ $(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
     });
 
-    /*把分类名称转换成a标签，用于点击后跳转到下一层级
+    //给分类名称这个a标签添加单击事件，展示下一层分类列表。
+    $("#jqGrid").on("click", "a[name='changeLevelA']", function () {
+        //alert($(this).attr("categoryLevel") + "===" + $(this).attr("parentId") + "===" + $(this).attr("categoryId"))
+        if(parseInt($(this).attr("categoryLevel")) > 2){
+            Swal.fire({
+                text: "没有下一级分类了",
+                icon: "warning",iconColor:"#dea32c",
+            });
+            return;
+        }
+
+        let categoryLevel = parseInt($(this).attr("categoryLevel")) + 1;
+        let parentId = $(this).attr("categoryId");
+
+        /**
+         * 点击第一层分类
+         * #oldParentId保存0
+         * #backParentId保存0（第一层的父id）
+         * #parentId保存点击的第一层分类的id
+         *
+         * 点击第二层分类
+         * #oldParentId保存0（第一层的父id）
+         * #backParentId保存点击的第一层分类的id
+         * #parentId保存点击的第二层分类的id
+         *
+         * 点击第三层分类提示没有下一层分类了
+         */
+        $("#categoryLevel").val(categoryLevel);
+        //alert($("#backParentId").val() + "===" + $("#parentId").val())
+        $("#oldParentId").val($("#backParentId").val());
+        $("#backParentId").val($("#parentId").val());
+        $("#parentId").val(parentId);
+
+        //刷新分类列表
+        $("#jqGrid").jqGrid('setGridParam', {
+            url: '/admin/categories/list?categoryLevel=' + categoryLevel + '&parentId=' + parentId,
+            mtype: "get",
+            datatype: "json",
+        }).trigger("reloadGrid");
+    })
+});
+
+/*把分类名称转换成a标签，用于点击后跳转到下一层级
     *
     * */
-    function changeLabelToA(cellValue, option, rowObject) {
-        console.log(rowObject)
-        console.log(rowObject.categoryId)
-        return "<a href='#' name='changeLevelA' categoryLevel='"+ rowObject.categoryLevel +"' parentId='"+ rowObject.parentId +"' categoryId='"+ rowObject.categoryId +"'>" + cellValue + "</a>";
-    }
-});
+function changeLabelToA(cellValue, option, rowObject) {
+    // console.log(rowObject)
+    // console.log(rowObject.categoryId)
+    return "<a href='#' name='changeLevelA' categoryLevel='"+ rowObject.categoryLevel +"' parentId='"+ rowObject.parentId +"' categoryId='"+ rowObject.categoryId +"'>" + cellValue + "</a>";
+}
+
+/**
+ * 展示分类列表，里面包含了分页插件
+ */
+function showCategoryList() {
+
+}
 
 /**
  * jqGrid重新加载

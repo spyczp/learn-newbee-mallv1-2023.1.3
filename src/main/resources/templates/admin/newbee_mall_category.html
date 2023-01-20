@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="admin/header::header-fragment">
+  <link rel="stylesheet" th:href="@{/admin/plugins/bootstrap/css/bootstrap.min.css}">
+  <link th:href="/jqGrid-5.8.0/ui.jqgrid-bootstrap4.css" rel="stylesheet"/>
+  <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert2/sweetalert2.min.css}">
 </header>
 <style>
   .ui-jqgrid tr.jqgrow td {
@@ -108,7 +111,7 @@
 <script th:src="@{/admin/plugins/jqgrid-5.7.0/jquery.jqGrid.min.js}"></script>
 <script th:src="@{/admin/plugins/jqgrid-5.7.0/grid.locale-cn.js}"></script>
 <!-- sweetalert -->
-<script th:src="@{/admin/plugins/sweetalert2/sweetalert2.min.css}"></script>
+<script th:src="@{/admin/plugins/sweetalert2/sweetalert2.all.min.js}"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
 <script th:src="@{/admin/dist/js/newbee_mall-category-test.js}"></script>
 </body>

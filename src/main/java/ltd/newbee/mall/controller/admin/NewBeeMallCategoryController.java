@@ -1,6 +1,6 @@
 package ltd.newbee.mall.controller.admin;
 
-import ltd.newbee.mall.service.impl.CategoryService;
+import ltd.newbee.mall.service.CategoryService;
 import ltd.newbee.mall.util.PageResult;
 import ltd.newbee.mall.util.ResponseGenerator;
 import org.springframework.stereotype.Controller;

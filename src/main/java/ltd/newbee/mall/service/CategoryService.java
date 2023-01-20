@@ -1,4 +1,4 @@
-package ltd.newbee.mall.service.impl;
+package ltd.newbee.mall.service;
 
 import ltd.newbee.mall.util.PageResult;
 

@@ -2,6 +2,7 @@ package ltd.newbee.mall.service.impl;
 
 import ltd.newbee.mall.dao.CategoryMapper;
 import ltd.newbee.mall.entity.Category;
+import ltd.newbee.mall.service.CategoryService;
 import ltd.newbee.mall.util.PageResult;
 import org.springframework.stereotype.Service;
 
