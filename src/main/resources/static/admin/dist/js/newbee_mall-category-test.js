@@ -67,25 +67,35 @@ $(function () {
         //alert($(this).attr("categoryLevel") + "===" + $(this).attr("parentId") + "===" + $(this).attr("categoryId"))
         if(parseInt($(this).attr("categoryLevel")) > 2){
             Swal.fire({
-                text: "没有下一级分类了",
+                text: "大哥，到底了，不能再下了",
                 icon: "warning",iconColor:"#dea32c",
             });
             return;
         }
 
+        //跳转后的层级
         let categoryLevel = parseInt($(this).attr("categoryLevel")) + 1;
+        //点击的分类的id，作为下一层级的父id
         let parentId = $(this).attr("categoryId");
 
         /**
-         * 点击第一层分类
+         * 处于第一层时：
+         * #oldParentId保存0
+         * #backParentId保存0（第一层的父id）
+         * #parentId保存0（第一层的父id）
+         * #categoryLevel保存第1层级
+         *
+         * 点击第一层分类后，处于第二层时：
          * #oldParentId保存0
          * #backParentId保存0（第一层的父id）
          * #parentId保存点击的第一层分类的id
+         * #categoryLevel保存第2层级
          *
-         * 点击第二层分类
+         * 点击第二层分类后，处于第三层时：
          * #oldParentId保存0（第一层的父id）
          * #backParentId保存点击的第一层分类的id
          * #parentId保存点击的第二层分类的id
+         * #categoryLevel保存第三层级
          *
          * 点击第三层分类提示没有下一层分类了
          */
@@ -101,7 +111,9 @@ $(function () {
             mtype: "get",
             datatype: "json",
         }).trigger("reloadGrid");
-    })
+    });
+
+    //
 });
 
 /*把分类名称转换成a标签，用于点击后跳转到下一层级
@@ -114,10 +126,53 @@ function changeLabelToA(cellValue, option, rowObject) {
 }
 
 /**
- * 展示分类列表，里面包含了分页插件
+ * 返回上一层级
+ * 1.当处于第一层，点击返回上一层，则提示不能往上了
+ * 2.当处于第二层，点击返回上一层，返回的是第一层，下面时第一层时的隐藏标签保存的值：
+ *      拿到隐藏标签种的categoryLevel（2）、backParentId，backParentId作为向后端发起请求时的父id参数（第一层的父id）
+ *      把#backParentId值保存到#parentId，#parentId保存第一层的父id
+ *      把#oldParentId值保存到#backParentId，#backParentId保存0（第一层的父id）
+ *      #oldParentId保存0
+ *      把#categoryLevel的值减一，等于1
+ *      向后端发起请求，刷新分类列表
+ * 3.当处于第三层，点击返回上一层，返回的是第二层：
+ *      拿到隐藏标签种的categoryLevel（3）、backParentId（点击的第一层分类的id）
+ *      把#backParentId值保存到#parentId，#parentId保存 点击的第一层分类的id
+ *      把#oldParentId值保存到#backParentId，#backParentId保存0，第一层的父id
+ *      #oldParentId保存0
+ *      把#categoryLevel的值减一，等于2
+ *      向后端发起请求，刷新分类列表
+ * 4.再从第二层返回第一层：
+ *
  */
-function showCategoryList() {
+function categoryBack() {
+    //如果当前层级是小于2的，则提示不能再往上了
+    if(parseInt($("#categoryLevel").val()) < 2){
+        Swal.fire({
+            text: "大哥，到顶了，不能在往上了",
+            icon: "warning",iconColor:"#dea32c",
+        })
+        return;
+    }
 
+    //返回上一层后的层级
+    var categoryLevel = parseInt($("#categoryLevel").val()) - 1;
+    //返回上一层后的父id
+    var parentId = $("#backParentId").val();
+
+    //把#backParentId值保存到#parentId，#parentId保存 点击的第一层分类的id
+    //把#oldParentId值保存到#backParentId，#backParentId保存0，第一层的父id
+    //把#categoryLevel的值减一，等于2
+    $("#parentId").val(parentId);
+    $("#backParentId").val($("#oldParentId").val());
+    $("#categoryLevel").val(categoryLevel);
+
+    //刷新分类列表
+    $("#jqGrid").jqGrid('setGridParam', {
+        url: '/admin/categories/list?categoryLevel=' + categoryLevel + '&parentId=' + parentId,
+        mtype: "get",
+        datatype: "json",
+    }).trigger("reloadGrid");
 }
 
 /**
@@ -152,23 +207,6 @@ function categoryManage() {
     } else {
         Swal.fire({
             text: "无下级分类",
-            icon: "warning",iconColor:"#dea32c",
-        });
-    }
-}
-
-/**
- * 返回上一层级
- */
-function categoryBack() {
-    var categoryLevel = parseInt($("#categoryLevel").val());
-    var backParentId = $("#backParentId").val();
-    if (categoryLevel == 2 || categoryLevel == 3) {
-        categoryLevel = categoryLevel - 1;
-        window.location.href = '/admin/categories?categoryLevel=' + categoryLevel + '&parentId=' + backParentId + '&backParentId=0';
-    } else {
-        Swal.fire({
-            text: "无上级分类",
             icon: "warning",iconColor:"#dea32c",
         });
     }
