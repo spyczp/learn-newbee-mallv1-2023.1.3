@@ -12,4 +12,8 @@ public interface CategoryMapper {
     int selectCountForPagination(Map<String, Object> map);
 
     int insertACategory(Category category);
+
+    int updateACategory(Category category);
+
+    int updateSomeIsDeletedToOne(Integer[] ids);
 }

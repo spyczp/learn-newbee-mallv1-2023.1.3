@@ -10,4 +10,8 @@ public interface CategoryService {
     PageResult queryCategoryListForPagination(Map<String, Object> map);
 
     int createACategory(Category category);
+
+    int editACategory(Category category);
+
+    int editSomeIsDeletedToOne(Integer[] ids);
 }

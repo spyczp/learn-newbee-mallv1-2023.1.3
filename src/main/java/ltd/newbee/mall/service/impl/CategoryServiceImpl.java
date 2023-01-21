@@ -36,4 +36,14 @@ public class CategoryServiceImpl implements CategoryService {
     public int createACategory(Category category) {
         return categoryMapper.insertACategory(category);
     }
+
+    @Override
+    public int editACategory(Category category) {
+        return categoryMapper.updateACategory(category);
+    }
+
+    @Override
+    public int editSomeIsDeletedToOne(Integer[] ids) {
+        return categoryMapper.updateSomeIsDeletedToOne(ids);
+    }
 }

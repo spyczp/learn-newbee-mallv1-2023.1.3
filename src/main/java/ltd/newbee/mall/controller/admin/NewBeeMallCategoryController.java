@@ -25,6 +25,87 @@ public class NewBeeMallCategoryController {
     private CategoryService categoryService;
 
     /**
+     * 删除一条分类信息，实际是到数据库把该条信息的is_deleted设置为1
+     * 1.拿到分类id组成的数组ids
+     *      判断ids是否为空
+     * 2.把ids提交到数据库，修改指定id的数据的is_deleted设置为1
+     * 3.返回响应对象给前端
+     * @param ids 前端提交的需要删除的分类的id组成的数组
+     * @return 响应对象
+     */
+    @PostMapping("/categories/delete")
+    @ResponseBody
+    public Object deleteACategory(@RequestBody Integer[] ids){
+        if(ids == null){
+            return ResponseGenerator.genFailResponse("参数异常");
+        }
+
+        ResponseObj responseObj = null;
+        try{
+            int result = categoryService.editSomeIsDeletedToOne(ids);
+            if(result == ids.length){
+                //代表成功
+                responseObj = ResponseGenerator.genSuccessResponse();
+            }else{
+                responseObj = ResponseGenerator.genFailResponse("删除分类信息失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            responseObj = ResponseGenerator.genFailResponse("删除分类信息失败");
+        }
+        return responseObj;
+    }
+
+    /**
+     * 修改分类信息
+     * 1.获取前端提供的分类信息：
+     *     "categoryId": id,
+     *     "categoryName": categoryName,
+     *     "categoryLevel": categoryLevel,
+     *     "parentId": parentId,
+     *     "categoryRank": categoryRank
+     * 2.判断数据是否为空
+     * 3.封装其它数据：
+     *      update_time,
+     *      update_user
+     * 4.访问业务层，到数据库中修改指定的数据
+     * 5.返回响应对象
+     * @param category 把前端提交的分类数据封装到实体类中
+     * @return 响应对象
+     */
+    @PostMapping("/categories/update")
+    @ResponseBody
+    public Object editACategory(@RequestBody Category category, HttpSession session){
+        if(category.getCategoryId() == null
+            || !StringUtils.hasText(category.getCategoryName())
+            || category.getCategoryLevel() == null
+            || category.getParentId() == null
+            || category.getCategoryRank() == null){
+
+            return ResponseGenerator.genFailResponse("参数异常");
+        }
+
+        category.setUpdateUser((Integer) session.getAttribute(Constants.SESSION_LOGIN_USER_ID));
+        category.setUpdateTime(new Date());
+
+        ResponseObj responseObj = null;
+        try{
+            int result = categoryService.editACategory(category);
+            if(result == 1){
+                //代表成功
+                responseObj = ResponseGenerator.genSuccessResponse();
+            }else{
+                responseObj = ResponseGenerator.genFailResponse("修改分类信息失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            responseObj = ResponseGenerator.genFailResponse("修改分类信息失败");
+        }
+
+        return responseObj;
+    }
+
+    /**
      * 新增分类信息
      * 1.获取前端提交的数据：categoryName、categoryLevel、parentId、categoryRank（需要判断数据是否为空）
      * 2.封装其它数据：isDeleted、createTime、createUser
@@ -45,6 +126,7 @@ public class NewBeeMallCategoryController {
         }
         byte num = 0;
         category.setIsDeleted(num);
+        //数据库保存的 创建时间 晚了8小时
         category.setCreateTime(new Date());
         category.setCreateUser((Integer) session.getAttribute(Constants.SESSION_LOGIN_USER_ID));
         ResponseObj responseObj = null;

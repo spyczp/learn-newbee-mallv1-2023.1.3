@@ -27,6 +27,25 @@
         update_user
     </sql>
 
+    <update id="updateSomeIsDeletedToOne" parameterType="int">
+        update tb_newbee_mall_goods_category
+        set is_deleted=1
+        where category_id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateACategory" parameterType="ltd.newbee.mall.entity.Category">
+        update tb_newbee_mall_goods_category
+        set
+            category_name=#{categoryName},
+            category_rank=#{categoryRank},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        where category_id=#{categoryId}
+    </update>
+
     <insert id="insertACategory" parameterType="ltd.newbee.mall.entity.Category">
         insert into tb_newbee_mall_goods_category
             (
@@ -69,6 +88,7 @@
                 parent_id=#{parentId}
             </if>
             and category_level=#{categoryLevel}
+            and is_deleted=0
         </where>
         order by category_rank
         limit #{startIndex}, #{pageSize}

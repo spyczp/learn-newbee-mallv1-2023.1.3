@@ -25,11 +25,13 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: 'id', name: 'categoryId', index: 'categoryId', width: 50, key: true, hidden: true},
+            //因为对单元数据进行过格式化，时候获取的单元数据是一个a标签，所以下面又写了一个name为categoryName的标签方便拿categoryName
             {label: '分类名称', name: 'categoryName', index: 'categoryName', width: 240, formatter:changeLabelToA},
             {label: '排序值', name: 'categoryRank', index: 'categoryRank', width: 120},
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 120},
             {label: '父id', name: 'parentId', index: 'parentId', hidden: true},
             {label: '层级', name: 'categoryLevel', index: 'categoryLevel', hidden: true},
+            //为了之后拿到categoryName,这里又写了一个隐藏的标签保存categoryName
             {label: '名称', name: 'categoryName', index: 'stringName', hidden: true},
         ],
         height: 560,
@@ -295,10 +297,11 @@ function categoryEdit() {
         return;
     }
     var rowData = $("#jqGrid").jqGrid("getRowData", id);
+    //console.log(rowData);
     $('.modal-title').html('分类编辑');
     $('#categoryModal').modal('show');
     $("#categoryId").val(id);
-    $("#categoryName").val(rowData.index(stringName));
+    $("#categoryName").val(rowData.categoryName);
     $("#categoryRank").val(rowData.categoryRank);
 }
 
@@ -328,7 +331,7 @@ function deleteCagegory() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.code == 0) {
                             Swal.fire({
                                 text: "删除成功",
                                 icon: "success",iconColor:"#1d953f",
