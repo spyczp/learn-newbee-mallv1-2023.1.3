@@ -27,6 +27,29 @@
         update_user
     </sql>
 
+    <insert id="insertACategory" parameterType="ltd.newbee.mall.entity.Category">
+        insert into tb_newbee_mall_goods_category
+            (
+            category_level,
+            parent_id,
+            category_name,
+            category_rank,
+            is_deleted,
+            create_time,
+            create_user
+            )
+        values
+            (
+            #{categoryLevel},
+            #{parentId},
+            #{categoryName},
+            #{categoryRank},
+            #{isDeleted},
+            #{createTime},
+            #{createUser}
+            )
+    </insert>
+
     <select id="selectCountForPagination" parameterType="map" resultType="int">
         select count(*)
         from tb_newbee_mall_goods_category

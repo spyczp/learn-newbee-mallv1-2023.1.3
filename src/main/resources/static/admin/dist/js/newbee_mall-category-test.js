@@ -30,6 +30,7 @@ $(function () {
             {label: '添加时间', name: 'createTime', index: 'createTime', width: 120},
             {label: '父id', name: 'parentId', index: 'parentId', hidden: true},
             {label: '层级', name: 'categoryLevel', index: 'categoryLevel', hidden: true},
+            {label: '名称', name: 'categoryName', index: 'stringName', hidden: true},
         ],
         height: 560,
         rowNum: 10,
@@ -185,6 +186,7 @@ function reload() {
     }).trigger("reloadGrid");
 }
 
+//打开新增的模态窗口
 function categoryAdd() {
     reset();
     $('.modal-title').html('分类添加');
@@ -212,12 +214,25 @@ function categoryManage() {
     }
 }
 
+/*
+* 新增功能:
+        1.点击新增按钮，弹出模态窗口
+        2.输入分类名称和排序值。通过获取标签值的形式获取用户输入的2个值。
+        3.点击确定，关闭模态窗口。
+            这个过程还进行了以下操作：
+            1.从隐藏标签中获取当前的层级和父id（需要判断用户输入的值是否为空）
+            2.把分类名称、排序值、层级、父id作为向后端发起请求的参数
+            3.向后端发起请求
+                请求成功，关闭模态窗口，刷新分类列表
+                请求失败，弹出提示框
+*
+*/
 //绑定modal上的保存按钮
 $('#saveButton').click(function () {
-    var categoryName = $("#categoryName").val();
-    var categoryLevel = $("#categoryLevel").val();
-    var parentId = $("#parentId").val();
-    var categoryRank = $("#categoryRank").val();
+    let categoryName = $("#categoryName").val();
+    let categoryRank = $("#categoryRank").val();
+    let categoryLevel = $("#categoryLevel").val();
+    let parentId = $("#parentId").val();
     if (!validCN_ENString2_18(categoryName)) {
         $('#edit-error-msg').css("display", "block");
         $('#edit-error-msg').html("请输入符合规范的分类名称！");
@@ -229,6 +244,7 @@ $('#saveButton').click(function () {
             "categoryRank": categoryRank
         };
         var url = '/admin/categories/save';
+        //这里有个bug，当选中一条记录，并点击新增时，会误判为修改，而不是新增。
         var id = getSelectedRowWithoutAlert();
         if (id != null) {
             url = '/admin/categories/update';
@@ -246,7 +262,7 @@ $('#saveButton').click(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
-                if (result.resultCode == 200) {
+                if (result.code == 0) {
                     $('#categoryModal').modal('hide');
                     Swal.fire({
                         text: "保存成功",
@@ -260,7 +276,6 @@ $('#saveButton').click(function () {
                         icon: "error",iconColor:"#f05b72",
                     });
                 }
-                ;
             },
             error: function () {
                 Swal.fire({
@@ -272,6 +287,7 @@ $('#saveButton').click(function () {
     }
 });
 
+//修改分类信息
 function categoryEdit() {
     reset();
     var id = getSelectedRow();
@@ -282,7 +298,7 @@ function categoryEdit() {
     $('.modal-title').html('分类编辑');
     $('#categoryModal').modal('show');
     $("#categoryId").val(id);
-    $("#categoryName").val(rowData.categoryName);
+    $("#categoryName").val(rowData.index(stringName));
     $("#categoryRank").val(rowData.categoryRank);
 }
 

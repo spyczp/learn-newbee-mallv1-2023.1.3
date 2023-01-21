@@ -1,16 +1,19 @@
 package ltd.newbee.mall.controller.admin;
 
+import ltd.newbee.mall.common.Constants;
+import ltd.newbee.mall.entity.Category;
 import ltd.newbee.mall.service.CategoryService;
 import ltd.newbee.mall.util.PageResult;
 import ltd.newbee.mall.util.ResponseGenerator;
+import ltd.newbee.mall.vo.ResponseObj;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +23,45 @@ public class NewBeeMallCategoryController {
 
     @Resource
     private CategoryService categoryService;
+
+    /**
+     * 新增分类信息
+     * 1.获取前端提交的数据：categoryName、categoryLevel、parentId、categoryRank（需要判断数据是否为空）
+     * 2.封装其它数据：isDeleted、createTime、createUser
+     * 3.访问业务层，向数据库中插入新的分类数据
+     * 4.返回响应对象
+     * @param category 把前端提交的分类数据封装到实体类中
+     * @return 响应对象
+     */
+    @PostMapping("/categories/save")
+    @ResponseBody
+    public Object createACategory(@RequestBody Category category, HttpSession session){
+        if(!StringUtils.hasText(category.getCategoryName())
+            || category.getCategoryLevel() == null
+            || category.getParentId() == null
+            || category.getCategoryRank() == null){
+
+            return ResponseGenerator.genFailResponse("参数异常");
+        }
+        byte num = 0;
+        category.setIsDeleted(num);
+        category.setCreateTime(new Date());
+        category.setCreateUser((Integer) session.getAttribute(Constants.SESSION_LOGIN_USER_ID));
+        ResponseObj responseObj = null;
+        try {
+            int result = categoryService.createACategory(category);
+            if(result == 1){
+                //代表新增成功
+                responseObj = ResponseGenerator.genSuccessResponse();
+            }else{
+                responseObj = ResponseGenerator.genFailResponse("新增分类信息失败");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            responseObj = ResponseGenerator.genFailResponse("新增分类信息失败");
+        }
+        return responseObj;
+    }
 
     /**
      * 展示分类列表，用到了前端分页插件

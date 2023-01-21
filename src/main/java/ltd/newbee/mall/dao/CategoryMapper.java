@@ -10,4 +10,6 @@ public interface CategoryMapper {
     List<Category> selectCategoryListForPagination(Map<String, Object> map);
 
     int selectCountForPagination(Map<String, Object> map);
+
+    int insertACategory(Category category);
 }

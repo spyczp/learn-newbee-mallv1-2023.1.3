@@ -31,4 +31,9 @@ public class CategoryServiceImpl implements CategoryService {
 
         return pageResult;
     }
+
+    @Override
+    public int createACategory(Category category) {
+        return categoryMapper.insertACategory(category);
+    }
 }
