@@ -27,6 +27,8 @@
                                 <label class="control-label">请选择分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <select class="form-control col-sm-3" id="levelOne"
                                         data-placeholder="请选择分类...">
+                                    <option></option>
+                                    <option th:each="c:${levelOneCategoryList}" th:value="${c.categoryId}" th:text="${c.categoryName}"></option>
                                 </select>&nbsp;
                                 <select class="form-control col-sm-3"
                                         id="levelTwo"
@@ -56,5 +58,7 @@
 <script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+
+<script th:src="@{/admin/dist/js/test-coupling.js}"></script>
 </body>
 </html>

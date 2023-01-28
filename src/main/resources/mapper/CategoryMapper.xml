@@ -69,6 +69,12 @@
             )
     </insert>
 
+    <select id="selectCategoryListByParentId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_category
+        where parent_id=#{parentId}
+    </select>
+
     <select id="selectCountForPagination" parameterType="map" resultType="int">
         select count(*)
         from tb_newbee_mall_goods_category

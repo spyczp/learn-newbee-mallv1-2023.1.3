@@ -46,4 +46,9 @@ public class CategoryServiceImpl implements CategoryService {
     public int editSomeIsDeletedToOne(Integer[] ids) {
         return categoryMapper.updateSomeIsDeletedToOne(ids);
     }
+
+    @Override
+    public List<Category> queryCategoryListByParentId(Long parentId) {
+        return categoryMapper.selectCategoryListByParentId(parentId);
+    }
 }
