@@ -18,18 +18,50 @@
         <div id="toolbar-container"><!-- 工具栏 --></div>
         <div id="editor-container"><!-- 编辑器 --></div>
     </div>
+    <input type="button" onclick="getContent()" value="获取文档内容">
 </body>
 <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
 <script>
     const { createEditor, createToolbar } = window.wangEditor
 
     const editorConfig = {
+        // 初始化 MENU_CONF 属性
+        MENU_CONF: {},
         placeholder: 'Type here...',
         onChange(editor) {
             const html = editor.getHtml()
             console.log('editor content', html)
             // 也可以同步到 <textarea>
         }
+    }
+    editorConfig.MENU_CONF['uploadImage'] = {
+        server: '/uploadImage',
+        fieldName: 'file',
+        // 单个文件的最大体积限制，默认为 2M
+        maxFileSize: 2 * 1024 * 1024,
+        // 最多可上传几个文件，默认为 100
+        maxNumberOfFiles: 5,
+
+        // 上传进度的回调函数
+        onProgress(progress) {
+            // progress 是 0-100 的数字
+            console.log('progress', progress)
+        },
+        // 单个文件上传成功之后
+        onSuccess(file, res) {
+            console.log(`${file.name} 上传成功`, res)
+        },
+        // 单个文件上传失败
+        onFailed(file, res) {
+            console.log(`${file.name} 上传失败`, res)
+        },
+        // 上传错误，或者触发 timeout 超时
+        onError(file, err, res) {
+            console.log(`${file.name} 上传出错`, err, res)
+        },
+
+        // 隐藏插入网络图片的功能
+        // 设置编辑区域高度为 640px
     }
 
     const editor = createEditor({
@@ -47,5 +79,10 @@
         config: toolbarConfig,
         mode: 'default', // or 'simple'
     })
+
+    function getContent() {
+        let content = editor.getHtml();
+        alert(content);
+    }
 </script>
 </html>

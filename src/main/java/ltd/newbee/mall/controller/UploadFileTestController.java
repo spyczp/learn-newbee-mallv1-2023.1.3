@@ -1,5 +1,7 @@
 package ltd.newbee.mall.controller;
 
+import ltd.newbee.mall.util.ImageData;
+import ltd.newbee.mall.util.ResponseGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -184,5 +186,40 @@ public class UploadFileTestController {
         }
 
         return "文件上传成功, 地址为: /upload/" + newFileName;
+    }
+
+    @PostMapping("/uploadImage")
+    @ResponseBody
+    public Object uploadImage(@RequestParam("file")MultipartFile file,
+                              HttpServletRequest request){
+
+        //1.判断前端上传的文件是否为空
+        if(file.isEmpty()){
+            return ResponseGenerator.genFailResponse();
+        }
+        //① 先获取文件后缀名
+        String fileName = file.getOriginalFilename();
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        //② 生成 日期格式+随机数+文件后缀名 文件名
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        Random r = new Random();
+        StringBuilder tempName = new StringBuilder();
+        tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
+        String newFileName = tempName.toString();
+
+        try {
+            //3.保存文件
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(FILE_UPLOAD_PATH, newFileName);
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseGenerator.genFailResponse();
+        }
+
+        ImageData imageData = new ImageData();
+        imageData.setUrl(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/upload/" + newFileName);
+
+        return ResponseGenerator.genSuccessResponse(imageData);
     }
 }
