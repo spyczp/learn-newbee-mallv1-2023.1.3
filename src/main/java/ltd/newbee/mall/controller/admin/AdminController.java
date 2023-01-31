@@ -239,6 +239,11 @@ public class AdminController {
         return "admin/login";
     }
 
+    /**
+     * 管理系统首页
+     * @param request
+     * @return
+     */
     @GetMapping({"", "/", "/index", "/index.html"})
     public String indexAll(HttpServletRequest request){
         request.setAttribute("path", "index");
