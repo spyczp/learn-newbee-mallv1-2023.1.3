@@ -188,9 +188,9 @@ public class UploadFileTestController {
         return "文件上传成功, 地址为: /upload/" + newFileName;
     }
 
-    @PostMapping("/uploadImage")
+    @PostMapping("/uploadImageTest")
     @ResponseBody
-    public Object uploadImage(@RequestParam("file")MultipartFile file,
+    public Object uploadImageTest(@RequestParam("file")MultipartFile file,
                               HttpServletRequest request){
 
         //1.判断前端上传的文件是否为空
