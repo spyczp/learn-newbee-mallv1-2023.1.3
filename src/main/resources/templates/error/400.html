@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/header::header-fragment"></header>
+<!-- Font Awesome -->
+<link rel="stylesheet" th:href="@{/admin/dist/css/all.min.css}">
+<!-- Theme style -->
+<link rel="stylesheet" th:href="@{/admin/dist/css/adminlte.min.css}">
+<!--fontawesome-->
+<link rel="stylesheet" href="https://kit.fontawesome.com/91981e4ac2.css" crossorigin="anonymous">
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- 引入页面头header-fragment -->
+  <div th:replace="admin/header::header-nav"></div>
+  <!-- 引入工具栏sidebar-fragment -->
+  <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>400 Error Page</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+        <h2 class="headline text-warning">400</h2>
+
+        <div class="error-content">
+          <h3><!--<i class="fas fa-exclamation-triangle text-danger"></i>-->
+            <span style="color: #ac2925">
+              <i class="fa-solid fa-circle-exclamation text-warning"></i>
+            </span>
+            参数异常.</h3>
+          <p>
+            you may <a th:href="@{/admin/index}">return to dashboard</a>.
+          </p>
+
+        </div>
+      </div>
+      <!-- /.error-page -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <!-- 引入页脚footer-fragment -->
+  <div th:replace="admin/footer::footer-fragment"></div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!--fontawesome-->
+<script src="https://kit.fontawesome.com/91981e4ac2.js" crossorigin="anonymous"></script>
+</body>
+</html>

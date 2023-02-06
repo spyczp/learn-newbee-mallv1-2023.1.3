@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head-fragment(title,path)">
+    <meta charset="UTF-8">
+    <title>新蜂商城 NewBee商城 newbee-mall</title>
+    <link rel="stylesheet" th:href="@{/mall/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/mall/css/common.css}">
+    <link rel="stylesheet" th:href="@{/mall/styles/header.css}">
+    <link rel="stylesheet" th:href="@{/mall/styles/index.css}">
+</head>
+
+<nav id="nav" th:fragment="nav-fragment">
+    <div class="banner_x center">
+        <a href="/index" class="logo"><h1>新蜂商城</h1></a>
+        <a href="/index" class="gif"></a>
+        <ul class="list">
+            <li><a href="##">秒杀</a></li>
+            <li><a href="##">优惠券</a></li>
+        </ul>
+        <div class="fr">
+            <div class="search">
+                <input class="text" type="text" id="keyword" autocomplete="off">
+                <div class="search_hot">
+                </div>
+            </div>
+            <div class="button iconfont icon-search"></div>
+        </div>
+    </div>
+</nav>
+
+<header id="header" th:fragment="header-fragment">
+    <div class="center">
+        <ul class="fl">
+            <li><a href="/index">新蜂商城</a></li>
+            <li><a href="/admin">后台管理系统</a></li>
+            <li><a href="https://edu.csdn.net/course/detail/26258">课程视频</a></li>
+            <li><a href="https://juejin.im/book/5da2f9d4f265da5b81794d48/section/5da2f9d6f265da5b794f2189">课程文档</a></li>
+            <li><a href="https://gitee.com/newbee-ltd/newbee-donate">捐赠</a></li>
+            <li><a href="https://github.com/newbee-ltd/newbee-mall/issues">问题反馈</a></li>
+            <li><a href="https://github.com/newbee-ltd/newbee-mall">GitHub 地址</a></li>
+            <li><a href="https://gitee.com/newbee-ltd/newbee-mall">码云Gitee 地址</a></li>
+        </ul>
+        <div class="fr">
+            <ul class="login">
+                <li><a href="/login">登录</a></li>
+                <li><a href="/register">注册</a></li>
+            </ul>
+            <div class="shopcart">
+                <a href="##" style="color: white;"><i class="iconfont icon-cart"></i>
+                    购物车(13)</a>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+</html>

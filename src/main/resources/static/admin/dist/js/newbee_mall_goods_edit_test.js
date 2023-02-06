@@ -1,3 +1,4 @@
+//便于在保存事件中使用富文本编辑对象
 var editor;
 
 $(function () {
@@ -56,12 +57,14 @@ $(function () {
         // 设置编辑区域高度为 640px
     }
 
-    const editor = createEditor({
+    //这个editor是function外定义的变量
+    editor = createEditor({
         selector: '#editor-container',
-        html: '<p><br></p>',
+        html: $(".editor-text").val(),
         config: editorConfig,
         mode: 'default', // or 'simple'
     })
+
 
     const toolbarConfig = {}
 
@@ -105,12 +108,12 @@ $(function () {
 $('#saveButton').click(function () {
     var goodsId = $('#goodsId').val();
     var goodsCategoryId = $('#levelThree option:selected').val();
-    var goodsName = $('#goodsName').val();
-    var tag = $('#tag').val();
-    var originalPrice = $('#originalPrice').val();
-    var sellingPrice = $('#sellingPrice').val();
-    var goodsIntro = $('#goodsIntro').val();
-    var stockNum = $('#stockNum').val();
+    var goodsName = $.trim($('#goodsName').val());
+    var tag = $.trim($('#tag').val());
+    var originalPrice = $.trim($('#originalPrice').val());
+    var sellingPrice = $.trim($('#sellingPrice').val());
+    var goodsIntro = $.trim($('#goodsIntro').val());
+    var stockNum = $.trim($('#stockNum').val());
     var goodsSellStatus = $("input[name='goodsSellStatus']:checked").val();
     var goodsDetailContent = editor.getHtml();
     var goodsCoverImg = $('#goodsCoverImg')[0].src;
@@ -177,7 +180,7 @@ $('#saveButton').click(function () {
         });
         return;
     }
-    if (isNull(stockNum) || sellingPrice < 0) {
+    if (isNull(stockNum) || stockNum < 0) {
         Swal.fire({
             text: "请输入商品库存数",
             icon: "error",iconColor:"#f05b72",
@@ -198,7 +201,7 @@ $('#saveButton').click(function () {
         });
         return;
     }
-        if (!validLength(goodsDetailContent, 50000)) {
+    if (!validLength(goodsDetailContent, 50000)) {
         Swal.fire({
             text: "商品介绍内容过长",
             icon: "error",iconColor:"#f05b72",
@@ -252,7 +255,7 @@ $('#saveButton').click(function () {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.code == '0') {
                 Swal.fire({
                     text: swlMessage,
                     icon: "success",iconColor:"#1d953f",
@@ -262,6 +265,7 @@ $('#saveButton').click(function () {
                     confirmButtonClass: 'btn btn-success',
                     buttonsStyling: false
                 }).then(function () {
+                    //这个跳转页面还没有写
                     window.location.href = "/admin/goods";
                 })
             } else {
@@ -269,8 +273,7 @@ $('#saveButton').click(function () {
                     text: result.message,
                     icon: "error",iconColor:"#f05b72",
                 });
-            }
-            ;
+            };
         },
         error: function () {
             Swal.fire({

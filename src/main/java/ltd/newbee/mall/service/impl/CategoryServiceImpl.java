@@ -51,4 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> queryCategoryListByParentId(Long parentId) {
         return categoryMapper.selectCategoryListByParentId(parentId);
     }
+
+    @Override
+    public Category queryCategoryByCategoryId(Long categoryId) {
+        return categoryMapper.selectCategoryByCategoryId(categoryId);
+    }
 }

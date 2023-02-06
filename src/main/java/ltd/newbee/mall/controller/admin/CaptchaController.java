@@ -1,4 +1,4 @@
-package ltd.newbee.mall.controller;
+package ltd.newbee.mall.controller.admin;
 
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;

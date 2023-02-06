@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 引入head部分 -->
+<head th:replace="~{mall/header :: head-fragment('NewBee商城-首页','index')}"></head>
+
+<body>
+
+<!-- 引入导航栏和搜索栏 -->
+<header th:replace="~{mall/header :: header-fragment}"></header>
+
+<content id="content">
+
+    <!--引入导航栏-->
+    <nav th:replace="~{mall/header :: nav-fragment}"></nav>
+
+    <div id="banner">
+        <div class="all-sort-list">
+            <div class="item">
+                <h3><span>·</span><a href="##">家电 数码 手机</a></h3>
+            </div>
+            <div class="item">
+                <h3><span>·</span><a href="##">女装 男装 穿搭</a></h3>
+            </div>
+            <div class="item">
+                <h3><span>·</span><a href="##">家具 家饰 家纺</a></h3>
+            </div>
+            <div class="item">
+                <h3><span>·</span><a href="##">运动 户外 乐器</a></h3>
+            </div>
+            <div class="item">
+                <h3><span>·</span><a href="##">游戏 动漫 影视</a></h3>
+            </div>
+            <div class="item">
+                <h3><span>·</span><a href="##">美妆 清洁 宠物</a></h3>
+            </div>
+
+            <div class="item">
+                <h3><span>·</span><a href="##">工具 装修 建材</a></h3>
+            </div>
+
+            <div class="item">
+                <h3><span>·</span><a href="##">鞋靴 箱包 配件</a></h3>
+            </div>
+
+            <div class="item">
+                <h3><span>·</span><a href="##">玩具 孕产 用品</a></h3>
+            </div>
+
+        </div>
+        <div class="swiper-container fl">
+            <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="https://juejin.im/book/5da2f9d4f265da5b81794d48/section/5da2f9d6f265da5b794f2189">
+                                <img src="https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner1.png" alt="">
+                            </a>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <div id="sub_banner">
+                <div class="hot-image">
+                    <a href="##">
+                        <img src="image/hot3.jpg" alt="热销">
+                    </a>
+                </div>
+                <div class="hot-image">
+                    <a href="##">
+                        <img src="image/hot3.jpg" alt="热销">
+                    </a>
+                </div>
+                 <div class="hot-image">
+                    <a href="##">
+                        <img src="image/hot3.jpg" alt="热销">
+                    </a>
+                </div>
+                <div class="hot-image">
+                    <a href="##">
+                        <img src="image/hot3.jpg" alt="热销">
+                    </a>
+                </div>
+    </div>
+
+    <div id="flash">
+        <h2>新品上线</h2>
+        <ul>
+                    <li>
+                        <a href="##">
+                            <img src="image/new.png" alt="新品">
+                            <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
+                            <p class="discount">超曲面OLED环幕屏</p>
+                            <p class="item_price">5399</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="##">
+                            <img src="image/new.png" alt="新品">
+                            <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
+                            <p class="discount">超曲面OLED环幕屏</p>
+                            <p class="item_price">5399</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <img src="image/new.png" alt="新品">
+                            <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
+                            <p class="discount">超曲面OLED环幕屏</p>
+                            <p class="item_price">5399</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <img src="image/new.png" alt="新品">
+                            <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
+                            <p class="discount">超曲面OLED环幕屏</p>
+                            <p class="item_price">5399</p>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="##">
+                            <img src="image/new.png" alt="新品">
+                            <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
+                            <p class="discount">超曲面OLED环幕屏</p>
+                            <p class="item_price">5399</p>
+                        </a>
+                    </li>
+        </ul>
+    </div>
+
+    <div id="recommend">
+        <h2>为你推荐</h2>
+        <a href="##" class="more">查看更多>></a>
+        <ul>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                                       <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="##">
+                            <div class="info discount">智能降噪 长久续航</div>
+                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
+                            <p class="item_price">2599</p>
+                            <p class="counter">猜你喜欢</p>
+                            <div class="comment">
+                                <p>新蜂精选</p>
+                                <p>好物也可以不贵</p>
+                            </div>
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</content>
+
+<!-- 引入页脚footer-fragment -->
+<div th:replace="~{mall/footer :: footer-fragment}"></div>
+
+</body>
+</html>

@@ -13,6 +13,8 @@ public interface CategoryMapper {
 
     List<Category> selectCategoryListByParentId(Long parentId);
 
+    Category selectCategoryByCategoryId(Long categoryId);
+
     int insertACategory(Category category);
 
     int updateACategory(Category category);

@@ -1,4 +1,4 @@
-package ltd.newbee.mall.controller;
+package ltd.newbee.mall.controller.test;
 
 import ltd.newbee.mall.dao.UserMapper;
 import ltd.newbee.mall.entity.User;

@@ -17,4 +17,6 @@ public interface CategoryService {
     int editSomeIsDeletedToOne(Integer[] ids);
 
     List<Category> queryCategoryListByParentId(Long parentId);
+
+    Category queryCategoryByCategoryId(Long categoryId);
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.GoodsInfoMapper">
+    <resultMap type="ltd.newbee.mall.entity.GoodsInfo" id="BaseResultMap">
+        <result property="goodsId" jdbcType="BIGINT" column="goods_id"/>
+        <result property="goodsName" jdbcType="VARCHAR" column="goods_name"/>
+        <result property="goodsIntro" jdbcType="VARCHAR" column="goods_intro"/>
+        <result property="goodsCategoryId" jdbcType="BIGINT" column="goods_category_id"/>
+        <result property="goodsCoverImg" jdbcType="VARCHAR" column="goods_cover_img"/>
+        <result property="goodsCarousel" jdbcType="VARCHAR" column="goods_carousel"/>
+        <result property="goodsDetailContent" jdbcType="LONGVARCHAR" column="goods_detail_content"/>
+        <result property="originalPrice" jdbcType="INTEGER" column="original_price"/>
+        <result property="sellingPrice" jdbcType="INTEGER" column="selling_price"/>
+        <result property="stockNum" jdbcType="INTEGER" column="stock_num"/>
+        <result property="tag" jdbcType="VARCHAR" column="tag"/>
+        <result property="goodsSellStatus" jdbcType="TINYINT" column="goods_sell_status"/>
+        <result property="createUser" jdbcType="INTEGER" column="create_user"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateUser" jdbcType="INTEGER" column="update_user"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        goods_id,
+        goods_name,
+        goods_intro,
+        goods_category_id,
+        goods_cover_img,
+        goods_carousel,
+        goods_detail_content,
+        original_price,
+        selling_price,
+        stock_num,
+        tag,
+        goods_sell_status,
+        create_user,
+        create_time,
+        update_user,
+        update_time
+    </sql>
+
+    <update id="updateGoodsSellStatusByIdsAndStateNum">
+        update tb_newbee_mall_goods_info
+        set
+            goods_sell_status=#{status}
+        where goods_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="selectCountForPagination" resultType="int">
+        select count(*)
+        from tb_newbee_mall_goods_info
+    </select>
+
+    <select id="selectGoodsInfoListForPagination" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_info
+        order by create_time desc
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <update id="updateAGoodsInfo" parameterType="ltd.newbee.mall.entity.GoodsInfo">
+        update tb_newbee_mall_goods_info
+        set
+            goods_name=#{goodsName},
+            goods_intro=#{goodsIntro},
+            goods_category_id=#{goodsCategoryId},
+            goods_cover_img=#{goodsCoverImg},
+            goods_carousel=#{goodsCarousel},
+            goods_detail_content=#{goodsDetailContent},
+            original_price=#{originalPrice},
+            selling_price=#{sellingPrice},
+            stock_num=#{stockNum},
+            tag=#{tag},
+            goods_sell_status=#{goodsSellStatus},
+            update_user=#{updateUser},
+            update_time=#{updateTime}
+        where goods_id=#{goodsId}
+    </update>
+
+    <select id="selectGoodsInfoByGoodsId" parameterType="long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_info
+        where goods_id=#{goodsId}
+    </select>
+
+    <insert id="insertAGoodsInfo" parameterType="ltd.newbee.mall.entity.GoodsInfo">
+        insert into tb_newbee_mall_goods_info(
+            goods_id,
+            goods_name,
+            goods_intro,
+            goods_category_id,
+            goods_cover_img,
+            goods_carousel,
+            goods_detail_content,
+            original_price,
+            selling_price,
+            stock_num,
+            tag,
+            goods_sell_status,
+            create_user,
+            create_time
+        )
+        values(
+            #{goodsId},
+            #{goodsName},
+            #{goodsIntro},
+            #{goodsCategoryId},
+            #{goodsCoverImg},
+            #{goodsCarousel},
+            #{goodsDetailContent},
+            #{originalPrice},
+            #{sellingPrice},
+            #{stockNum},
+            #{tag},
+            #{goodsSellStatus},
+            #{createUser},
+            #{createTime}
+              )
+
+    </insert>
+</mapper>

@@ -34,15 +34,20 @@
                                     </block>
                                     <th:block th:unless="${null == levelOneCategoryList}">
                                         <th:block th:each="c : ${levelOneCategoryList}">
-                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}">
-                                                >
-                                            </option>
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                            th:selected="${null != currentLevelOneCategory and c.categoryId == currentLevelOneCategory.categoryId} ? true : false"></option>
                                         </th:block>
                                     </th:block>
                                 </select>&nbsp;
                                 <select class="form-control col-sm-3"
                                         id="levelTwo"
                                         data-placeholder="请选择分类...">
+                                    <th:block th:if="${null != currentLevelTwoCategory}">
+                                        <th:block th:each="c : ${levelTwoCategoryList}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                            th:selected="${c.categoryId == currentLevelTwoCategory.categoryId} ? true : false"></option>
+                                        </th:block>
+                                    </th:block>
                                     <!--<th:block th:unless="${null == secondLevelCategories}">
                                         <th:block th:each="c : ${secondLevelCategories}">
                                             <option th:value="${c.categoryId}" th:text="${c.categoryName}">
@@ -54,6 +59,12 @@
                                 <select class="form-control col-sm-3"
                                         id="levelThree"
                                         data-placeholder="请选择分类...">
+                                    <th:block th:if="${null != currentLevelThreeCategory}">
+                                        <th:block th:each="c: ${levelThreeCategoryList}">
+                                            <option th:value="${c.categoryId}" th:text="${c.categoryName}"
+                                            th:selected="${c.categoryId == currentLevelThreeCategory.categoryId} ? true : false"></option>
+                                        </th:block>
+                                    </th:block>
                                     <!--<th:block th:unless="${null == thirdLevelCategories}">
                                         <th:block th:each="c : ${thirdLevelCategories}">
                                             <option th:value="${c.categoryId}" th:text="${c.categoryName}">
@@ -64,45 +75,50 @@
                                 </select>
                             </div>
                             <div class="form-group" style="display:flex;">
-                                <input type="hidden" id="goodsId" name="goodsId">
-                                <input type="text" class="form-control col-sm-6" id="goodsName" name="goodsName" placeholder="*请输入商品名称(必填)" required="true">
+                                <input type="hidden" id="goodsId" th:value="${goods != null and goods.goodsId != null} ? ${goods.goodsId} : 0" name="goodsId">
+                                <input type="text" class="form-control col-sm-6" id="goodsName" name="goodsName" th:value="${goods != null and goods.goodsName != null} ? ${goods.goodsName} : ''" placeholder="*请输入商品名称(必填)" required="true">
                                 &nbsp;&nbsp;
-                                <input type="text" class="form-control col-sm-6" id="goodsIntro" name="goodsIntro" placeholder="*请输入商品简介(100字以内)" required="true">
+                                <input type="text" class="form-control col-sm-6" id="goodsIntro" name="goodsIntro" th:value="${goods != null and goods.goodsIntro != null} ? ${goods.goodsIntro} : ''" placeholder="*请输入商品简介(100字以内)" required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <input type="number" class="form-control col-sm-6" id="originalPrice"
                                        name="originalPrice"
+                                       th:value="${goods != null and goods.originalPrice != null} ? ${goods.originalPrice} : ''"
                                        placeholder="*请输入商品价格"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="number" class="form-control col-sm-6" id="sellingPrice"
                                        name="sellingPrice"
+                                       th:value="${goods != null and goods.sellingPrice != null} ? ${goods.sellingPrice} : ''"
                                        placeholder="*请输入商品售卖价"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
                                 <input type="number" class="form-control col-sm-6" id="stockNum" name="stockNum"
+                                       th:value="${goods != null and goods.stockNum != null} ? ${goods.stockNum} : ''"
                                        placeholder="*请输入商品库存数"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="text" class="form-control col-sm-6" id="tag" name="tag"
+                                       th:value="${goods != null and goods.tag != null} ? ${goods.tag} : ''"
                                        placeholder="*请输入商品小标签"
                                        required="true">
                             </div>
                             <div class="form-group">
                                 <label class="control-label">上架状态:&nbsp;</label>
-                                <input name="goodsSellStatus" type="radio" id="goodsSellStatusTrue" checked=true value="0"/>&nbsp;上架&nbsp;
-                                <input name="goodsSellStatus" type="radio" id="goodsSellStatusFalse" value="1"/>&nbsp;下架&nbsp;
+                                <input name="goodsSellStatus" type="radio" id="goodsSellStatusTrue" th:checked="${goods == null || (goods != null and goods.goodsSellStatus != null and goods.goodsSellStatus == 0)} ? true : false" value="0"/>&nbsp;上架&nbsp;
+                                <input name="goodsSellStatus" type="radio" id="goodsSellStatusFalse" th:checked="${goods != null and goods.goodsSellStatus != null and goods.goodsSellStatus == 1} ? true : false" value="1"/>&nbsp;下架&nbsp;
                             </div>
                             <div class="form-group">
                                 <div class="form-group">
                                     <div class="col-sm-4">
+                                        <!--goods应该是修改商品信息时往请求域中保存的数据-->
                                         <th:block th:if="${null == goods}">
                                             <img id="goodsCoverImg" src="/admin/dist/img/img-upload.png"
                                                  style="height: 64px;width: 64px;">
                                         </th:block>
                                         <th:block th:unless="${null == goods}">
-                                            <img id="goodsCoverImg"
+                                            <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
                                                  style="width:160px ;height: 160px;display:block;">
                                         </th:block>
                                     </div>
@@ -117,9 +133,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--富文本编辑器容器-->
+                            <!--富文本编辑器容器th:utext="${goods != null and goods.goodsDetailContent != null} ? ${goods.goodsDetailContent} : ''"-->
                             <div id="editor—wrapper" class="form-group" style="height: 750px">
                                 <div id="toolbar-container"><!-- 工具栏 --></div>
+                                <!--这里保存从请求域中读取的商品详情内容，需要填充到富文本编辑器中-->
+                                <input type="hidden" class="editor-text" th:value="${goods != null and goods.goodsDetailContent != null} ? ${goods.goodsDetailContent} : ''">
                                 <div id="editor-container"><!-- 编辑器 --></div>
                             </div>
 
@@ -158,7 +176,7 @@
 
 <script th:src="@{/admin/dist/js/public.js}"></script>
 
-<script th:src="@{ /admin/dist/js/newbee_mall_goods_edit_test.js}"></script>
+<script th:src="@{/admin/dist/js/newbee_mall_goods_edit_test.js}"></script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package ltd.newbee.mall.controller;
+package ltd.newbee.mall.controller.test;
 
 import ltd.newbee.mall.util.ImageData;
 import ltd.newbee.mall.util.ResponseGenerator;
