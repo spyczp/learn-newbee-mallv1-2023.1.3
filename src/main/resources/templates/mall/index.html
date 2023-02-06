@@ -4,6 +4,9 @@
 <!-- 引入head部分 -->
 <head th:replace="~{mall/header :: head-fragment('NewBee商城-首页','index')}"></head>
 
+<!--轮播图样式-->
+<link rel="stylesheet" th:href="@{/mall/css/swiper-bundle.min.css}">
+
 <body>
 
 <!-- 引入导航栏和搜索栏 -->
@@ -61,22 +64,22 @@
     <div id="sub_banner">
                 <div class="hot-image">
                     <a href="##">
-                        <img src="image/hot3.jpg" alt="热销">
+                        <img th:src="@{/mall/image/hot3.jpg}" alt="热销">
                     </a>
                 </div>
                 <div class="hot-image">
                     <a href="##">
-                        <img src="image/hot3.jpg" alt="热销">
+                        <img th:src="@{/mall/image/hot3.jpg}" alt="热销">
                     </a>
                 </div>
                  <div class="hot-image">
                     <a href="##">
-                        <img src="image/hot3.jpg" alt="热销">
+                        <img th:src="@{/mall/image/hot3.jpg}" alt="热销">
                     </a>
                 </div>
                 <div class="hot-image">
                     <a href="##">
-                        <img src="image/hot3.jpg" alt="热销">
+                        <img th:src="@{/mall/image/hot3.jpg}" alt="热销">
                     </a>
                 </div>
     </div>
@@ -86,7 +89,7 @@
         <ul>
                     <li>
                         <a href="##">
-                            <img src="image/new.png" alt="新品">
+                            <img th:src="@{/mall/image/new.png}" alt="新品">
                             <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
                             <p class="discount">超曲面OLED环幕屏</p>
                             <p class="item_price">5399</p>
@@ -94,7 +97,7 @@
                     </li>
                      <li>
                         <a href="##">
-                            <img src="image/new.png" alt="新品">
+                            <img th:src="@{/mall/image/new.png}" alt="新品">
                             <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
                             <p class="discount">超曲面OLED环幕屏</p>
                             <p class="item_price">5399</p>
@@ -102,7 +105,7 @@
                     </li>
                     <li>
                         <a href="##">
-                            <img src="image/new.png" alt="新品">
+                            <img th:src="@{/mall/image/new.png}" alt="新品">
                             <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
                             <p class="discount">超曲面OLED环幕屏</p>
                             <p class="item_price">5399</p>
@@ -110,7 +113,7 @@
                     </li>
                     <li>
                         <a href="##">
-                            <img src="image/new.png" alt="新品">
+                            <img th:src="@{/mall/image/new.png}" alt="新品">
                             <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
                             <p class="discount">超曲面OLED环幕屏</p>
                             <p class="item_price">5399</p>
@@ -118,7 +121,7 @@
                     </li>
                      <li>
                         <a href="##">
-                            <img src="image/new.png" alt="新品">
+                            <img th:src="@{/mall/image/new.png}" alt="新品">
                             <p class="name">HUAWEI Mate 30 Pro 双4000万徕卡电影四摄</p>
                             <p class="discount">超曲面OLED环幕屏</p>
                             <p class="item_price">5399</p>
@@ -134,7 +137,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -147,7 +150,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -160,7 +163,7 @@
                                        <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -173,7 +176,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -186,7 +189,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -199,7 +202,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -212,7 +215,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -225,7 +228,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -238,7 +241,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -251,7 +254,7 @@
                     <li>
                         <a href="##">
                             <div class="info discount">智能降噪 长久续航</div>
-                            <img src="image/recommend.jpg" alt="索尼 WH-1000XM3 头戴式耳机">
+                            <img th:src="@{/mall/image/recommend.jpg}" alt="索尼 WH-1000XM3 头戴式耳机">
                             <p class="name">索尼 WH-1000XM3 头戴式耳机</p>
                             <p class="item_price">2599</p>
                             <p class="counter">猜你喜欢</p>
@@ -267,6 +270,9 @@
 
 <!-- 引入页脚footer-fragment -->
 <div th:replace="~{mall/footer :: footer-fragment}"></div>
+
+<!--轮播图插件-->
+<script th:src="@{/mall/js/swiper-bundle.min.js}" type="text/javascript"></script>
 
 </body>
 </html>
