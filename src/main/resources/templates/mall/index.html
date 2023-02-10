@@ -7,6 +7,13 @@
 <!--轮播图样式-->
 <link rel="stylesheet" th:href="@{/mall/css/swiper-bundle.min.css}">
 
+<!--<style>
+    .swiper {
+        width: 600px;
+        height: 300px;
+    }
+</style>-->
+
 <body>
 
 <!-- 引入导航栏和搜索栏 -->
@@ -51,7 +58,7 @@
             </div>
 
         </div>
-        <div class="swiper-container fl">
+        <!--<div class="swiper-container fl">
             <div class="swiper-wrapper">
                         <div class="swiper-slide">
                             <a href="https://juejin.im/book/5da2f9d4f265da5b81794d48/section/5da2f9d6f265da5b794f2189">
@@ -59,7 +66,52 @@
                             </a>
                         </div>
             </div>
+        </div>-->
+        <!-- Slider main container -->
+        <!--<div class="swiper fl">
+            &lt;!&ndash; Additional required wrapper &ndash;&gt;
+            <div class="swiper-wrapper">
+                <th:block th:unless="${#lists.isEmpty(carouselVOList)}">
+                    <th:block th:each="carousel : ${carouselVOList}">
+                        &lt;!&ndash; Slides &ndash;&gt;
+                        <div class="swiper-slide">
+                            <a th:href="@{${carousel.redirectUrl}}">
+                                <img th:src="@{${carousel.carouselUrl}}" alt="轮播图">
+                            </a>
+                        </div>
+                    </th:block>
+                </th:block>
+            </div>
+            &lt;!&ndash; If we need pagination &ndash;&gt;
+            <div class="swiper-pagination"></div>
+
+            &lt;!&ndash; If we need navigation buttons &ndash;&gt;
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            &lt;!&ndash; If we need scrollbar &ndash;&gt;
+            <div class="swiper-scrollbar"></div>
+        </div>-->
+
+        <!--轮播图标签-->
+        <div class="swiper-container fl">
+            <div class="swiper-wrapper">
+                <th:block th:unless="${#lists.isEmpty(carouselVOList)}">
+                    <th:block th:each="carousel : ${carouselVOList}">
+                        <div class="swiper-slide">
+                            <a th:href="@{${carousel.redirectUrl}}">
+                                <img th:src="@{${carousel.carouselUrl}}" alt="">
+                            </a>
+                        </div>
+                    </th:block>
+                </th:block>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
+
+
     </div>
     <div id="sub_banner">
                 <div class="hot-image">

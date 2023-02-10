@@ -25,6 +25,14 @@
         update_user
     </sql>
 
+    <select id="selectCarouselListByCount" parameterType="int" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from tb_newbee_mall_carousel
+        where is_deleted=0
+        order by carousel_rank desc
+        limit #{count}
+    </select>
+
     <select id="selectCarouselById" parameterType="int" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from tb_newbee_mall_carousel

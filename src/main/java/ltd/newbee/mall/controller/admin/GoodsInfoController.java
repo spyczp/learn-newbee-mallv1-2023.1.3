@@ -31,7 +31,7 @@ import static ltd.newbee.mall.common.Constants.FILE_UPLOAD_DIC;
 
 @Controller
 @RequestMapping("/admin")
-public class NewBeeMallGoodsInfoController {
+public class GoodsInfoController {
 
     @Resource
     private CategoryService categoryService;

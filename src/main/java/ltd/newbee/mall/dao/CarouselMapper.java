@@ -22,4 +22,6 @@ public interface CarouselMapper {
     int updateIsDeletedByIds(Integer[] ids, Integer updateUser);
 
     Carousel selectCarouselById(Integer id);
+
+    List<Carousel> selectCarouselListByCount(int count);
 }

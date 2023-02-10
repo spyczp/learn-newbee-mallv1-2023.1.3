@@ -25,7 +25,7 @@ import static ltd.newbee.mall.common.Constants.FILE_UPLOAD_DIC;
 
 @Controller
 @RequestMapping("/admin")
-public class NewBeeMallCarouselController {
+public class CarouselController {
 
     @Resource
     private CarouselService carouselService;

@@ -2,6 +2,9 @@ package ltd.newbee.mall.service;
 
 import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.util.PageResult;
+import ltd.newbee.mall.vo.NewBeeMallIndexCarouselVO;
+
+import java.util.List;
 
 public interface CarouselService {
 
@@ -14,4 +17,6 @@ public interface CarouselService {
     int deleteCarousel(Integer[] ids, Integer updateUser);
 
     Carousel queryCarouselById(Integer id);
+
+    List<NewBeeMallIndexCarouselVO> queryCarouselListByCount(int count);
 }

@@ -8,7 +8,7 @@
  */
 package ltd.newbee.mall.common;
 
-public enum NewBeeMallCategoryLevelEnum {
+public enum CategoryLevelEnum {
 
     DEFAULT(0, "ERROR"),
     LEVEL_ONE(1, "一级分类"),
@@ -19,13 +19,13 @@ public enum NewBeeMallCategoryLevelEnum {
 
     private String name;
 
-    NewBeeMallCategoryLevelEnum(int level, String name) {
+    CategoryLevelEnum(int level, String name) {
         this.level = level;
         this.name = name;
     }
 
-    public static NewBeeMallCategoryLevelEnum getNewBeeMallOrderStatusEnumByLevel(int level) {
-        for(NewBeeMallCategoryLevelEnum newBeeMallCategoryLevelEnum: NewBeeMallCategoryLevelEnum.values()){
+    public static CategoryLevelEnum getNewBeeMallOrderStatusEnumByLevel(int level) {
+        for(CategoryLevelEnum newBeeMallCategoryLevelEnum: CategoryLevelEnum.values()){
             if(newBeeMallCategoryLevelEnum.getLevel() == level){
                 return newBeeMallCategoryLevelEnum;
             }

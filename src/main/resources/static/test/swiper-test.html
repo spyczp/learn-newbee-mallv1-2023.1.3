@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swiper Test</title>
+    <link rel="stylesheet" href="/mall/css/swiper-bundle.min.css"/>
+</head>
+
+<style>
+    .swiper {
+        width: 600px;
+        height: 600px;
+    }
+</style>
+
+
+<body>
+<!-- Slider main container -->
+<div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+            <img src="/test/img/20230111_10405621.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/test/img/20230111_10405623.jpg">
+        </div>
+        <div class="swiper-slide">
+            <img src="/test/img/20230111_10405638.jpg">
+        </div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+</div>
+
+<script src="/mall/js/swiper-bundle.min.js"></script>
+
+<script type="text/javascript">
+    const swiper = new Swiper('.swiper', {
+
+        autoplay:{
+            delay: 2000,
+            disableOnInteraction: false
+        },
+        // Optional parameters
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        autoHeight: true,
+        setWrapperSize: true
+    });
+</script>
+</body>
+</html>
