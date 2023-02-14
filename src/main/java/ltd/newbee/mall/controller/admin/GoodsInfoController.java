@@ -8,7 +8,6 @@ import ltd.newbee.mall.service.GoodsInfoService;
 import ltd.newbee.mall.util.ImageData;
 import ltd.newbee.mall.util.PageResult;
 import ltd.newbee.mall.util.ResponseGenerator;
-import org.apache.ibatis.reflection.ArrayUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;

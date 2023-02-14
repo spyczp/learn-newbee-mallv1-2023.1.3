@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.MallIndexConfigMapper">
+    <resultMap type="ltd.newbee.mall.entity.MallIndexConfig" id="BaseResultMap">
+        <result property="configId" jdbcType="BIGINT" column="config_id"/>
+        <result property="configName" jdbcType="VARCHAR" column="config_name"/>
+        <result property="configType" jdbcType="TINYINT" column="config_type"/>
+        <result property="goodsId" jdbcType="BIGINT" column="goods_id"/>
+        <result property="redirectUrl" jdbcType="VARCHAR" column="redirect_url"/>
+        <result property="configRank" jdbcType="INTEGER" column="config_rank"/>
+        <result property="isDeleted" jdbcType="TINYINT" column="is_deleted"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="createUser" jdbcType="INTEGER" column="create_user"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+        <result property="updateUser" jdbcType="INTEGER" column="update_user"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        config_id,
+        config_name,
+        config_type,
+        goods_id,
+        redirect_url,
+        config_rank,
+        is_deleted,
+        create_time,
+        create_user,
+        update_time,
+        update_user
+    </sql>
+
+    <update id="updateIsDeletedToOneByIds" parameterType="long">
+        update tb_newbee_mall_index_config
+        set is_deleted=1
+        where config_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateAMallIndexConfig" parameterType="ltd.newbee.mall.entity.MallIndexConfig">
+        update tb_newbee_mall_index_config
+        set
+            config_name=#{configName},
+            config_type=#{configType},
+            goods_id=#{goodsId},
+            redirect_url=#{redirectUrl},
+            config_rank=#{configRank},
+            update_time=#{updateTime},
+            update_user=#{updateUser}
+        where config_id=#{configId}
+    </update>
+
+    <insert id="insertAMallIndexConfig" parameterType="ltd.newbee.mall.entity.MallIndexConfig">
+        insert into tb_newbee_mall_index_config(
+            config_name,
+            config_type,
+            goods_id,
+            redirect_url,
+            config_rank,
+            is_deleted,
+            create_time,
+            create_user
+        )
+        values(
+            #{configName},
+            #{configType},
+            #{goodsId},
+            #{redirectUrl},
+            #{configRank},
+            #{isDeleted},
+            #{createTime},
+            #{createUser}
+              )
+    </insert>
+
+    <select id="selectCountForPagination" resultType="int">
+        select count(*)
+        from tb_newbee_mall_index_config
+        where config_type=#{configType}
+        and is_deleted=0
+    </select>
+
+    <select id="selectListByConditionForPagination" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_index_config
+        where config_type=#{configType}
+        and is_deleted=0
+        order by config_rank desc
+        limit #{startIndex},#{pageSize}
+    </select>
+</mapper>
