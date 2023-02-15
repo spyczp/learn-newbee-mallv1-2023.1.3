@@ -7,6 +7,14 @@ import java.util.List;
 public interface MallIndexConfigMapper {
 
     /**
+     * 根据configType和count查询 商城配置信息列表
+     * @param configType 配置类型
+     * @param count 查询的数量
+     * @return 商城配置信息列表
+     */
+    List<MallIndexConfig> selectByConfigTypeAndCount(Byte configType, Integer count);
+
+    /**
      * 根据configId删除商城配置信息
      * 实际是修改每条商城配置信息的is_deleted的值为1
      * @param ids configId组成的数组

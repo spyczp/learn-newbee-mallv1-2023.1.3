@@ -3,6 +3,8 @@ package ltd.newbee.mall.service;
 import ltd.newbee.mall.entity.GoodsInfo;
 import ltd.newbee.mall.util.PageResult;
 
+import java.util.List;
+
 public interface GoodsInfoService {
 
     int createAGoodsInfo(GoodsInfo goodsInfo);
@@ -14,4 +16,6 @@ public interface GoodsInfoService {
     PageResult queryGoodsInfoListForPagination(Integer pageNum, Integer pageSize);
 
     int changeGoodsSellStatusByIdsAndStateNum(Long[] ids, Integer status);
+
+
 }

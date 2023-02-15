@@ -29,6 +29,14 @@
         update_user
     </sql>
 
+    <select id="selectByConfigTypeAndCount" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_index_config
+        where config_type=#{configType}
+        order by config_rank desc
+        limit #{count}
+    </select>
+
     <update id="updateIsDeletedToOneByIds" parameterType="long">
         update tb_newbee_mall_index_config
         set is_deleted=1

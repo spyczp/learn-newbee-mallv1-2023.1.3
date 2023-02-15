@@ -10,6 +10,8 @@ public interface GoodsInfoMapper {
 
     GoodsInfo selectGoodsInfoByGoodsId(Long goodsId);
 
+    List<GoodsInfo> selectListByGoodsIds(List<Long> goodsIds);
+
     int updateAGoodsInfo(GoodsInfo goodsInfo);
 
     List<GoodsInfo> selectGoodsInfoListForPagination(Integer startIndex, Integer pageSize);
