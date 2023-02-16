@@ -42,15 +42,39 @@
             <li><a href="https://gitee.com/newbee-ltd/newbee-mall">码云Gitee 地址</a></li>
         </ul>
         <div class="fr">
-            <ul class="login">
-                <li><a href="/login">登录</a></li>
-                <li><a href="/register">注册</a></li>
-            </ul>
-            <div class="shopcart">
-                <a href="##" style="color: white;"><i class="iconfont icon-cart"></i>
-                    购物车(13)</a>
-            </div>
-
+            <th:block th:unless="${session.mallUserLoginId == null}">
+                <div class="user">
+                    <ul class="selector">
+                        <li>
+                            <a th:href="@{/personal}">个人中心</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/orders}">我的订单</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}">退出登录</a>
+                        </li>
+                    </ul>
+                    <a href="##" class="username">
+                        <th:block th:text="${session.mallUserNickName}"></th:block>
+                        <i class="iconfont icon-down"></i>
+                    </a>
+                </div>
+                <div class="shopcart">
+                    <a href="##" style="color: white;"><i class="iconfont icon-cart"></i>
+                        购物车(0)</a>
+                </div>
+            </th:block>
+            <th:block th:if="${session.mallUserLoginId == null}">
+                <ul class="login">
+                    <li><a th:href="@{/login}">登录</a></li>
+                    <li><a th:href="@{/register}">注册</a></li>
+                </ul>
+                <div class="shopcart">
+                    <a href="##" style="color: white;"><i class="iconfont icon-cart"></i>
+                        购物车(0)</a>
+                </div>
+            </th:block>
         </div>
     </div>
 </header>

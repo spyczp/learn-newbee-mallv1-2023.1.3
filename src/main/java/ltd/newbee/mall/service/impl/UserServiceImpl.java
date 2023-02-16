@@ -1,13 +1,16 @@
 package ltd.newbee.mall.service.impl;
 
+import ltd.newbee.mall.common.ResponseMsgEnum;
 import ltd.newbee.mall.dao.UserMapper;
 import ltd.newbee.mall.entity.User;
 import ltd.newbee.mall.service.UserService;
-import ltd.newbee.mall.util.PageResult;
+import ltd.newbee.mall.util.MD5Util;
+import ltd.newbee.mall.util.ResponseGenerator;
+import ltd.newbee.mall.vo.ResponseObj;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,20 +18,46 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+
     /**
-     * 查询用户列表和总记录数用于分页功能
-     * @param startNum 起始数据
-     * @param pageSize 每页显示条数
-     * @return 分页数据对象
+     * 新增用户
+     * 1.需要判断该用户是否存在，根据loginName判断
+     * 2.封装用户数据
+     * 3.访问数据库，新增用户信息
+     * @param loginName 登录用户名
+     * @param password 密码
+     * @return 响应对象，包含注册结果
      */
     @Override
-    public PageResult queryUsersForPagination(Integer startNum, Integer pageSize) {
+    public ResponseObj addAUser(String loginName, String password) throws Exception {
+        //1.需要判断该用户是否存在，根据loginName判断
+        if (userMapper.selectUserInfoByLoginName(loginName) != null) {
+            return ResponseGenerator.genFailResponse(ResponseMsgEnum.USER_REGISTER_ALREADY_EXIST.getMessage());
+        }
 
-        List<User> userList = userMapper.selectUsersForPagination(startNum, pageSize);
-        int totalCount = userMapper.selectTotalCountForPagination();
-
-        //当前页没有传到业务层，需要在控制器那里设置
-        return new PageResult(0, pageSize, totalCount, userList);
+        //把用户提交的密码转为md5形式
+        String passwordMd5 = MD5Util.getMD5(password);
+        //2.封装数据
+        User user = User.builder()
+                .loginName(loginName)
+                .nickName(loginName)
+                .passwordMd5(passwordMd5)
+                .isDeleted((byte) 0)
+                .lockedFlag((byte) 0)
+                .createTime(new Date())
+                .build();
+        //3.访问数据库，新增用户信息
+        int result = userMapper.insertAUser(user);
+        if(result == 1){
+            //成功
+            return ResponseGenerator.genSuccessResponse();
+        }else{
+            return ResponseGenerator.genFailResponse(ResponseMsgEnum.USER_REGISTER_FAIL.getMessage());
+        }
     }
 
+    @Override
+    public User userLogin(String loginName){
+        return userMapper.selectUserInfoByLoginName(loginName);
+    }
 }

@@ -1,9 +1,12 @@
 package ltd.newbee.mall.service;
 
 
-import ltd.newbee.mall.util.PageResult;
+import ltd.newbee.mall.entity.User;
+import ltd.newbee.mall.vo.ResponseObj;
 
 public interface UserService {
 
-    PageResult queryUsersForPagination(Integer startNum, Integer pageSize);
+    ResponseObj addAUser(String loginName, String password) throws Exception;
+
+    User userLogin(String loginName);
 }

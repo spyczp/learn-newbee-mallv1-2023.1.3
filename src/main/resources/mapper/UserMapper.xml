@@ -2,45 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ltd.newbee.mall.dao.UserMapper">
     <resultMap type="ltd.newbee.mall.entity.User" id="BaseResultMap">
-        <result property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="password" column="password"/>
+        <result property="userId" jdbcType="BIGINT" column="user_id"/>
+        <result property="nickName" jdbcType="VARCHAR" column="nick_name"/>
+        <result property="loginName" jdbcType="VARCHAR" column="login_name"/>
+        <result property="passwordMd5" jdbcType="VARCHAR" column="password_md5"/>
+        <result property="introduceSign" jdbcType="VARCHAR" column="introduce_sign"/>
+        <result property="address" jdbcType="VARCHAR" column="address"/>
+        <result property="isDeleted" jdbcType="TINYINT" column="is_deleted"/>
+        <result property="lockedFlag" jdbcType="TINYINT" column="locked_flag"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, password
+        user_id,
+        nick_name,
+        login_name,
+        password_md5,
+        introduce_sign,
+        address,
+        is_deleted,
+        locked_flag,
+        create_time
     </sql>
 
-    <select id="selectTotalCountForPagination" resultType="int">
-        select count(*)
-        from tb_user
-    </select>
-
-    <select id="selectUsersForPagination" resultMap="BaseResultMap">
+    <select id="selectUserInfoByLoginName" parameterType="String" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
-        from tb_user
-        order by id
-        limit #{startNum}, #{pageSize}
+        from tb_newbee_mall_user
+        where login_name=#{loginName}
     </select>
 
-    <select id="findAllUser" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"></include>
-        from tb_user
-    </select>
-
-    <insert id="insertUser" parameterType="ltd.newbee.mall.entity.User">
-        insert into tb_user(name,password)
-        values(#{name},#{password})
+    <insert id="insertAUser" parameterType="ltd.newbee.mall.entity.User">
+        insert into tb_newbee_mall_user(
+            nick_name,
+            login_name,
+            password_md5,
+            introduce_sign,
+            address,
+            is_deleted,
+            locked_flag,
+            create_time
+            )
+        values(
+            #{nickName},
+            #{loginName},
+            #{passwordMd5},
+            #{introduceSign},
+            #{address},
+            #{isDeleted},
+            #{lockedFlag},
+            #{createTime}
+            )
     </insert>
 
-    <update id="updateUser" parameterType="ltd.newbee.mall.entity.User">
-        update tb_user
-        set name=#{name},password=#{password}
-        where id=#{id}
-    </update>
-
-    <delete id="deleteUser" parameterType="int">
-        delete from tb_user
-        where id=#{id}
-    </delete>
 </mapper>

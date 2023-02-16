@@ -7,6 +7,8 @@ public class Constants {
 
     public final static String FILE_UPLOAD_DIC = "D:\\upload\\";//上传文件的默认url前缀，根据部署设置自行修改
 
+    public final static String FILE_IMG_DIC = "D:\\upload\\goods_img\\";//商城商品图片目录
+
     public final static int INDEX_CAROUSEL_COUNT = 5;//首页轮播图数量(可根据自身需求修改)
 
     public final static int INDEX_CATEGORY_NUMBER = 10;//首页一级分类的最大数量
@@ -40,5 +42,9 @@ public class Constants {
 
     public final static String SESSION_LOGIN_USER_ID = "loginUserId"; //登录用户id
 
+    public final static String MALL_USER_LOGIN_ID = "mallUserLoginId"; //商城登录用户名
 
+    public final static String MALL_USER_LOGIN_NAME = "mallUserLoginName"; //商城登录用户id
+
+    public final static String MALL_USER_NICK_NAME = "mallUserNickName"; //商城登录用户昵称
 }

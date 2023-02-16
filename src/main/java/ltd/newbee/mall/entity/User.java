@@ -1,13 +1,24 @@
 package ltd.newbee.mall.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 @Builder
 public class User {
 
-    private Integer id;
-    private String name;
-    private String password;
+    private Long userId;
+    private String nickName;
+    private String loginName;
+    private String passwordMd5;
+    private String introduceSign;
+    private String address;
+    private Byte isDeleted;
+    private Byte lockedFlag;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
 }
