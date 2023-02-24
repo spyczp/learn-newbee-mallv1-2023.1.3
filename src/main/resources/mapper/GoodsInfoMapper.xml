@@ -39,6 +39,34 @@
         update_time
     </sql>
 
+    <select id="selectCountForMall" parameterType="map" resultType="int">
+        select count(*)
+        from tb_newbee_mall_goods_info
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                goods_name like concat('%', #{goodsName}, '%')
+            </if>
+            <if test="categoryId != null">
+                goods_category_id=#{categoryId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectGoodsInfoListByConditionForMall" parameterType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_goods_info
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                goods_name like concat('%', #{goodsName}, '%')
+            </if>
+            <if test="categoryId != null">
+                goods_category_id=#{categoryId}
+            </if>
+        </where>
+        order by ${column} ${order}
+        limit #{startIndex},#{pageSize}
+    </select>
+
     <update id="updateGoodsSellStatusByIdsAndStateNum">
         update tb_newbee_mall_goods_info
         set

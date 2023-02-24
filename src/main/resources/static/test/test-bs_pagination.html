@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试分页插件</title>
+    <!--  It is a good idea to bundle all CSS in one file. The same with JS -->
+    <!--  JQUERY -->
+    <script type="text/javascript" src="/mall/plugins/jquery-1.11.1-min.js"></script>
+    <!--  BOOTSTRAP -->
+    <link rel="stylesheet" type="text/css" href="/mall/plugins/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="/mall/plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <!--  PAGINATION plugin -->
+    <link rel="stylesheet" type="text/css" href="/mall/plugins/bs_pagination/jquery.bs_pagination.min.css">
+    <script type="text/javascript" src="/mall/plugins/bs_pagination/jquery.bs_pagination.min.js"></script>
+    <script type="text/javascript" src="/mall/plugins/bs_pagination/localization/en.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+
+            $("#demo_pag1").bs_pagination({
+                totalPages: 100
+            });
+
+        });
+    </script>
+</head>
+<body>
+<!--  Just create a div and give it an ID -->
+
+<div id="demo_pag1"></div>
+
+</body>
+</html>

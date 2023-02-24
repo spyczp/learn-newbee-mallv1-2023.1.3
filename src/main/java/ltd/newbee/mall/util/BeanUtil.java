@@ -11,7 +11,7 @@ public class BeanUtil {
         return copyList(sources, clazz, null);
     }
 
-    private static <T> Object copyProperties(Object source, T target, String... ignoreProperties) {
+    public static <T> Object copyProperties(Object source, T target, String... ignoreProperties) {
         if(source == null){
             return target;
         }
@@ -19,7 +19,7 @@ public class BeanUtil {
         return target;
     }
 
-    private static <T> List<T> copyList(List sources, Class<T> clazz, Callback<T> callback) {
+    public static <T> List<T> copyList(List sources, Class<T> clazz, Callback<T> callback) {
         ArrayList<T> targetList = new ArrayList<>();
         if(sources != null){
             try{

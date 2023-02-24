@@ -4,6 +4,7 @@ import ltd.newbee.mall.entity.GoodsInfo;
 import ltd.newbee.mall.util.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsInfoService {
 
@@ -17,5 +18,5 @@ public interface GoodsInfoService {
 
     int changeGoodsSellStatusByIdsAndStateNum(Long[] ids, Integer status);
 
-
+    PageResult searchGoodsInfoListForMall(Map<String, Object> map);
 }

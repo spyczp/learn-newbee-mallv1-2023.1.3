@@ -1,0 +1,90 @@
+<!-- Copyright (c) 2019-2020 十三 all rights reserved. -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="mall/header::head-fragment('NewBee商城-搜索','search')">
+    <link rel="stylesheet" type="text/css" th:href="@{/admin/plugins/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+<header th:replace="mall/header::header-fragment"></header>
+<!-- nav -->
+<nav th:replace="mall/header::nav-fragment"></nav>
+
+<!--分类筛选-->
+<div class="classify">
+    <div class="category">
+        <div class="category_bar">
+            <th:block th:if="${searchPageCategoryVO!=null}">
+                <div class="fm c">
+                    <a href="##" class="qqq" th:text="${searchPageCategoryVO.secondLevelCategoryName}">newbee-mall</a>
+                    <div>
+                        <th:block th:each="thirdLevelCategory : ${searchPageCategoryVO.thirdLevelCategoryList}">
+                            <a th:href="@{${'/search?goodsCategoryId='+thirdLevelCategory.categoryId}}"
+                               th:text="${thirdLevelCategory.categoryName}">newbee-mall</a>
+                        </th:block>
+                    </div>
+                </div>
+                <i><img src="mall/image/right-@1x.png" alt=""></i>
+                <div class="findword">"
+                    <th:block th:text="${searchPageCategoryVO.currentCategoryName}"></th:block>
+                    "
+                </div>
+            </th:block>
+            <th:block th:if="${searchPageCategoryVO==null}">
+                <th:block th:if="${keyword!=null and keyword !=''}">
+                    <div class="findword">搜索 "
+                        <th:block th:text="${keyword}"></th:block>
+                        "
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<!--排序-->
+<div class="sort">
+    <div class="list">
+        <a>
+            <div class="active" name="orderParam" orderBy="stock_num" order="desc">推荐</div>
+        </a>
+        <a>
+            <div  name="orderParam" orderBy="create_time" order="desc">新品</div>
+        </a>
+        <a>
+            <div name="orderParam" orderBy="original_price" order="asc">价格</div>
+        </a>
+    </div>
+</div>
+
+<div>
+    <!--保存用户输入的关键字.当id为keyword时js没有拿到值，很奇怪-->
+    <input type="hidden" id="myKeyword" th:value="${keyword}">
+    <!--保存用户点击的分类的id-->
+    <input type="hidden" id="myCategoryId" th:value="${categoryId}">
+</div>
+
+<div class="goods_item center">
+    <div class="main center"></div>
+
+    <!--供分页插件使用-->
+<!--    <div id="demo_pag1"></div>-->
+    <div>
+        <nav aria-label="Search results pages">
+            <ul class="pagination justify-content-end" id="paginationUl">
+
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div th:replace="mall/footer::footer-fragment"></div>
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap-->
+<script type="text/javascript" th:src="@{/admin/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/mall/js/search.js}"></script>
+</body>
+
+</html>

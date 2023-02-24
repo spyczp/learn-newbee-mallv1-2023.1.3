@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.ShoppingCartItemMapper">
+    <resultMap type="ltd.newbee.mall.entity.ShoppingCartItem" id="BaseResultMap">
+        <result property="cartItemId" jdbcType="BIGINT" column="cart_item_id"/>
+        <result property="userId" jdbcType="BIGINT" column="user_id"/>
+        <result property="goodsId" jdbcType="BIGINT" column="goods_id"/>
+        <result property="goodsCount" jdbcType="INTEGER" column="goods_count"/>
+        <result property="isDeleted" jdbcType="TINYINT" column="is_deleted"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+        <result property="updateTime" jdbcType="TIMESTAMP" column="update_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        cart_item_id,
+        user_id,
+        goods_id,
+        goods_count,
+        is_deleted,
+        create_time,
+        update_time
+    </sql>
+
+    <select id="selectByCartItemId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_shopping_cart_item
+        where cart_item_id=#{cartItemId}
+    </select>
+
+    <update id="updateIsDeletedToOne" parameterType="java.lang.Long">
+        update tb_newbee_mall_shopping_cart_item
+        set is_deleted=1
+        where cart_item_id=#{cartItemId}
+        and is_deleted=0
+    </update>
+
+    <update id="updateAGoodsCount" parameterType="ltd.newbee.mall.entity.ShoppingCartItem">
+        update tb_newbee_mall_shopping_cart_item
+        <set>
+            <if test="userId != null">
+                user_id=#{userId},
+            </if>
+            <if test="goodsId != null">
+                goods_id=#{goodsId},
+            </if>
+            <if test="goodsCount != null">
+                goods_count=#{goodsCount},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="createTime != null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time=#{updateTime}
+            </if>
+        </set>
+        where cart_item_id=#{cartItemId}
+    </update>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_shopping_cart_item
+        where user_id=#{userId}
+        and is_deleted=0
+        limit #{number}
+    </select>
+
+    <insert id="insertAShoppingCartItem" parameterType="ltd.newbee.mall.entity.ShoppingCartItem">
+        insert into tb_newbee_mall_shopping_cart_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cartItemId != null">
+                cart_item_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsCount != null">
+                goods_count,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cartItemId != null">
+                #{cartItemId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId},
+            </if>
+            <if test="goodsCount != null">
+                #{goodsCount},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectCountByUserId" parameterType="long" resultType="int">
+        select count(*)
+        from tb_newbee_mall_shopping_cart_item
+        where user_id=#{userId}
+    </select>
+
+    <select id="selectByUserIdAndGoodsId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_shopping_cart_item
+        where user_id=#{userId}
+        and goods_id=#{goodsId}
+    </select>
+
+
+</mapper>
