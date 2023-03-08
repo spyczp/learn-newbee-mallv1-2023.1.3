@@ -185,7 +185,7 @@ public class MallIndexConfigController {
 
         if(indexConfigTypeEnum.equals(IndexConfigTypeEnum.DEFAULT)){
             //到这里，说明configType参数异常
-            return "error/500";
+            return "500_mine";
         }
 
         request.setAttribute("path", indexConfigTypeEnum.getName());

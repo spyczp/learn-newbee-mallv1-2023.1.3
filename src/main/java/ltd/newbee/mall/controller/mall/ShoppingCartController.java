@@ -24,6 +24,40 @@ public class ShoppingCartController {
     private ShoppingCartItemService shoppingCartItemService;
 
     /**
+     * 跳转到结算页面
+     * 1.获取购物车商品信息
+     *      商品信息为空，则不跳转
+     * 2.计算总价
+     *      总价 < 1,则跳转错误页面
+     * @param request
+     * @param session
+     * @return 跳转到结算页面
+     */
+    @GetMapping("/shop-cart/settle")
+    public String settlePage(HttpServletRequest request, HttpSession session){
+        Long userId = (Long) session.getAttribute(Constants.MALL_USER_LOGIN_ID);
+        List<MallShoppingCartItemVO> shoppingCartItemVOS = shoppingCartItemService.getMyShoppingCartItems(userId);
+
+        if(CollectionUtils.isEmpty(shoppingCartItemVOS)){
+            //无数据则不跳转至结算页
+            return "/shop-cart";
+        }
+
+        int priceTotal = 0;
+        //总价
+        for(MallShoppingCartItemVO shoppingCartItemVO: shoppingCartItemVOS){
+            priceTotal += shoppingCartItemVO.getSellingPrice() * shoppingCartItemVO.getGoodsCount();
+        }
+        if(priceTotal < 1){
+            return "500_mine";
+        }
+
+        request.setAttribute("priceTotal", priceTotal);
+        request.setAttribute("myShoppingCartItems", shoppingCartItemVOS);
+        return "mall/order-settle";
+    }
+
+    /**
      * 删除一条购物车上的商品
      * @param cartItemId 购物车商品的cartItemId
      * @return 响应对象，包含处理结果
@@ -93,14 +127,14 @@ public class ShoppingCartController {
             //购物项总数:所有商品的总数量
             itemsTotal = shoppingCartItemVOS.stream().mapToInt(MallShoppingCartItemVO::getGoodsCount).sum();
             if(itemsTotal < 1){
-                return "error/500";
+                return "500_mine";
             }
             //总价 p = p + sp * gc;
             for(MallShoppingCartItemVO shoppingCartItemVO: shoppingCartItemVOS){
                 priceTotal += shoppingCartItemVO.getSellingPrice() * shoppingCartItemVO.getGoodsCount();
             }
             if(priceTotal < 1){
-                return "error/500";
+                return "500_mine";
             }
         }
 

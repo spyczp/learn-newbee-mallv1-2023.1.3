@@ -39,6 +39,26 @@
         update_time
     </sql>
 
+    <update id="updateStockNum" parameterType="ltd.newbee.mall.entity.StockNumDTO">
+        <foreach collection="stockNumDTOS" item="stockNumDTO">
+            update tb_newbee_mall_goods_info
+            set stock_num = stock_num-#{stockNumDTO.goodsCount}
+            where goods_id = #{stockNumDTO.goodsId}
+            and stock_num>=#{stockNumDTO.goodsCount}
+            and goods_sell_status = 0;
+        </foreach>
+    </update>
+
+    <!--<update id="updateStockNum">
+        <foreach collection="stockNumDTOS" item="stockNumDTO">
+            update tb_newbee_mall_goods_info
+            set stock_num = stock_num-#{stockNumDTO.goodsCount}
+            where goods_id = #{stockNumDTO.goodsId}
+            and stock_num>=#{stockNumDTO.goodsCount}
+            and goods_sell_status = 0;
+        </foreach>
+    </update>-->
+
     <select id="selectCountForMall" parameterType="map" resultType="int">
         select count(*)
         from tb_newbee_mall_goods_info

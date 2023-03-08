@@ -33,12 +33,12 @@ public class GoodsController {
     @GetMapping("/detail/{goodsId}")
     public String goodsDetail(@PathVariable("goodsId") Long goodsId, HttpServletRequest request){
         if(ObjectUtils.isEmpty(goodsId)){
-            return "error/500";
+            return "500_mine";
         }
 
         GoodsInfo goodsInfo = goodsInfoService.queryGoodsInfoByGoodsId(goodsId);
         if(ObjectUtils.isEmpty(goodsInfo)){
-            return "error/500";
+            return "500_mine";
         }
 
         request.setAttribute("goodsDetail", goodsInfo);

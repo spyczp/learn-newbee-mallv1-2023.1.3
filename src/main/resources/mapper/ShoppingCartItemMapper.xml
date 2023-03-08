@@ -21,6 +21,16 @@
         update_time
     </sql>
 
+    <update id="updateIsDeletedToOneByList">
+        update tb_newbee_mall_shopping_cart_item
+        set is_deleted=1
+        where cart_item_id in
+        <foreach collection="list" open="(" close=")" separator="," item="cartItemId">
+            #{cartItemId}
+        </foreach>
+        and is_deleted=0
+    </update>
+
     <select id="selectByCartItemId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
         from tb_newbee_mall_shopping_cart_item
@@ -128,6 +138,7 @@
         from tb_newbee_mall_shopping_cart_item
         where user_id=#{userId}
         and goods_id=#{goodsId}
+        and is_deleted=0
     </select>
 
 

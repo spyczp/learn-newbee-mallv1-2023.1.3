@@ -25,6 +25,37 @@
         create_time
     </sql>
 
+    <update id="updateUserInfo" parameterType="ltd.newbee.mall.entity.User">
+        update tb_newbee_mall_user
+        <set>
+            <if test="nickName != null">
+                nick_name=#{nickName},
+            </if>
+            <if test="loginName != null">
+                login_name=#{loginName},
+            </if>
+            <if test="passwordMd5 != null">
+                password_md5=#{passwordMd5},
+            </if>
+            <if test="introduceSign != null">
+                introduce_sign=#{introduceSign},
+            </if>
+            <if test="address != null">
+                address=#{address},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="lockedFlag != null">
+                locked_flag=#{lockedFlag},
+            </if>
+            <if test="createTime != null">
+                create_time=#{createTime}
+            </if>
+        </set>
+        where user_id=#{userId}
+    </update>
+
     <select id="selectUserInfoByLoginName" parameterType="String" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include>
         from tb_newbee_mall_user

@@ -47,4 +47,6 @@ public class Constants {
     public final static String MALL_USER_LOGIN_NAME = "mallUserLoginName"; //商城登录用户id
 
     public final static String MALL_USER_NICK_NAME = "mallUserNickName"; //商城登录用户昵称
+
+    public final static String MALL_USER_ADDRESS = "mallUserAddress"; // 商城登录用户的地址
 }

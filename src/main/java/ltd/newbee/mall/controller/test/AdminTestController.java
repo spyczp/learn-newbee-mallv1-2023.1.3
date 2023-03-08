@@ -10,6 +10,6 @@ public class AdminTestController {
 
     @GetMapping("/error500")
     public String error500(){
-        return "error/500";
+        return "500_mine";
     }
 }

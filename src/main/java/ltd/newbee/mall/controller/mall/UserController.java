@@ -7,11 +7,9 @@ import ltd.newbee.mall.service.UserService;
 import ltd.newbee.mall.util.MD5Util;
 import ltd.newbee.mall.util.ResponseGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -21,6 +19,31 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    /**
+     * 修改用户信息
+     * @param user 用户数据
+     * @return 响应处理结果
+     */
+    @PostMapping("/personal/updateInfo")
+    @ResponseBody
+    public Object updateInfo(@RequestBody User user){
+        if(ObjectUtils.isEmpty(user)){
+            return ResponseGenerator.genFailResponse(ResponseMsgEnum.USER_INFO_ERROR.getMessage());
+        }
+
+        try{
+            int result = userService.updateUserInfo(user);
+            if(result > 0){
+                return ResponseGenerator.genSuccessResponse();
+            }else{
+                return ResponseGenerator.genFailResponse(ResponseMsgEnum.USER_INFO_UPDATE_ERROR.getMessage());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseGenerator.genFailResponse(ResponseMsgEnum.USER_INFO_UPDATE_ERROR.getMessage());
+        }
+    }
 
     /**
      * 用户登录
@@ -77,6 +100,7 @@ public class UserController {
                 session.setAttribute(Constants.MALL_USER_LOGIN_NAME, loginName);
                 session.setAttribute(Constants.MALL_USER_NICK_NAME, user.getNickName());
                 session.setAttribute(Constants.MALL_USER_LOGIN_ID, user.getUserId());
+                session.setAttribute(Constants.MALL_USER_ADDRESS, user.getAddress());
                 //删除session中的verifyCode
                 session.removeAttribute(Constants.VERIFY_CODE);
                 return ResponseGenerator.genSuccessResponse();

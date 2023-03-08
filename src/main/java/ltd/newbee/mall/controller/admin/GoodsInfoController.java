@@ -159,7 +159,7 @@ public class GoodsInfoController {
     public String toGoodsEditPage(@PathVariable("goodsId") Long goodsId,
                                   HttpServletRequest request){
         if(ObjectUtils.isEmpty(goodsId)){
-            return "error/400";
+            return "400_mine";
         }
 
         GoodsInfo goodsInfo = goodsInfoService.queryGoodsInfoByGoodsId(goodsId);
@@ -209,7 +209,7 @@ public class GoodsInfoController {
             return "admin/newbee_mall_goods_edit";
         }
 
-        return "error/500";
+        return "500_mine";
 
     }
 

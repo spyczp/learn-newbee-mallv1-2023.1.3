@@ -9,4 +9,6 @@ public interface UserService {
     ResponseObj addAUser(String loginName, String password) throws Exception;
 
     User userLogin(String loginName);
+
+    int updateUserInfo(User user);
 }

@@ -29,8 +29,8 @@ $(function () {
             records: "data.totalCount"
         },
         prmNames: {
-            page: "page",
-            rows: "limit",
+            page: "pageNum",
+            rows: "pageSize",
             order: "order",
         },
         gridComplete: function () {
@@ -100,7 +100,7 @@ $(function () {
  * jqGrid重新加载
  */
 function reload() {
-    initFlatPickr();
+    //initFlatPickr();
     var page = $("#jqGrid").jqGrid('getGridParam', 'page');
     $("#jqGrid").jqGrid('setGridParam', {
         page: page
@@ -192,7 +192,7 @@ $('#saveButton').click(function () {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (result) {
-            if (result.resultCode == 200) {
+            if (result.code == "0") {
                 $('#orderInfoModal').modal('hide');
                 Swal.fire({
                     text: "保存成功",
@@ -261,7 +261,7 @@ function orderCheckDone() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.code == "0") {
                             Swal.fire({
                                 text: "配货完成",
                                 icon: "success",iconColor:"#1d953f",
@@ -325,7 +325,7 @@ function orderCheckOut() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.code == "0") {
                             Swal.fire({
                                 text: "出库成功",
                                 icon: "success",iconColor:"#1d953f",
@@ -365,7 +365,7 @@ function closeOrder() {
                     contentType: "application/json",
                     data: JSON.stringify(ids),
                     success: function (r) {
-                        if (r.resultCode == 200) {
+                        if (r.code == "0") {
                             Swal.fire({
                                 text: "关闭成功",
                                 icon: "success",iconColor:"#1d953f",

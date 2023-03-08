@@ -13,6 +13,8 @@ public interface ShoppingCartItemMapper {
 
     int updateIsDeletedToOne(Long cartItemId);
 
+    int updateIsDeletedToOneByList(List<Long> itemIdList);
+
     ShoppingCartItem selectByUserIdAndGoodsId(Long userId, Long goodsId);
 
     int selectCountByUserId(Long userId);

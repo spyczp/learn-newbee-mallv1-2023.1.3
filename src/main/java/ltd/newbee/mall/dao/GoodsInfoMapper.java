@@ -1,6 +1,7 @@
 package ltd.newbee.mall.dao;
 
 import ltd.newbee.mall.entity.GoodsInfo;
+import ltd.newbee.mall.entity.StockNumDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +25,6 @@ public interface GoodsInfoMapper {
     int selectCountForPagination();
 
     int updateGoodsSellStatusByIdsAndStateNum(Long[] ids, Integer status);
+
+    int updateStockNum(List<StockNumDTO> stockNumDTOS);
 }

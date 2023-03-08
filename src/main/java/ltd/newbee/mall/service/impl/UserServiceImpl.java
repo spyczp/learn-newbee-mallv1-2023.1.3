@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserService {
     public User userLogin(String loginName){
         return userMapper.selectUserInfoByLoginName(loginName);
     }
+
+    @Override
+    public int updateUserInfo(User user) {
+        return userMapper.updateUserInfo(user);
+    }
 }

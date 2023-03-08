@@ -8,4 +8,6 @@ public interface UserMapper {
     int insertAUser(User user);
 
     User selectUserInfoByLoginName(String loginName);
+
+    int updateUserInfo(User user);
 }

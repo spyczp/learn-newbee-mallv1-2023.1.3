@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ltd.newbee.mall.dao.OrderItemMapper">
+    <resultMap type="ltd.newbee.mall.entity.OrderItem" id="BaseResultMap">
+        <result property="orderItemId" jdbcType="BIGINT" column="order_item_id"/>
+        <result property="orderId" jdbcType="BIGINT" column="order_id"/>
+        <result property="goodsId" jdbcType="BIGINT" column="goods_id"/>
+        <result property="goodsName" jdbcType="VARCHAR" column="goods_name"/>
+        <result property="goodsCoverImg" jdbcType="VARCHAR" column="goods_cover_img"/>
+        <result property="sellingPrice" jdbcType="INTEGER" column="selling_price"/>
+        <result property="goodsCount" jdbcType="INTEGER" column="goods_count"/>
+        <result property="createTime" jdbcType="TIMESTAMP" column="create_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_item_id,
+        order_id,
+        goods_id,
+        goods_name,
+        goods_cover_img,
+        selling_price,
+        goods_count,
+        create_time
+    </sql>
+
+    <select id="selectByOrderIds" parameterType="Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_order_item
+        where order_id in
+        <foreach collection="list" separator="," item="orderId" open="(" close=")">
+            #{orderId}
+        </foreach>
+    </select>
+
+    <select id="selectByOrderId" parameterType="Long" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from tb_newbee_mall_order_item
+        where order_id=#{orderId}
+    </select>
+
+    <insert id="insertBatch" parameterType="ltd.newbee.mall.entity.OrderItem">
+        insert into tb_newbee_mall_order_item(
+            order_id,
+            goods_id,
+            goods_name,
+            goods_cover_img,
+            selling_price,
+            goods_count
+        )
+        values
+        <foreach collection="list" item="orderItem" separator=",">
+            (
+            #{orderItem.orderId},
+            #{orderItem.goodsId},
+            #{orderItem.goodsName},
+            #{orderItem.goodsCoverImg},
+            #{orderItem.sellingPrice},
+            #{orderItem.goodsCount}
+            )
+        </foreach>
+    </insert>
+
+</mapper>
